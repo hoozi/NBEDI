@@ -1,0 +1,46 @@
+.download_container {
+	@extend %wrap_center;
+	.download_body {
+		@extend %overHidden;
+		padding:26px 0;
+		.download_list {
+			width:1230px;
+			li {
+				margin:0 26px 26px 0;
+				.important_item {
+					color:#e54646
+				}
+			}
+		}
+	}
+}
+.page_header {
+	@extend %clearfix;
+	@include border(bottom);
+	.page_name {
+		@extend %fl;
+		padding:20px 0;
+		font-size:$baseMiddle;
+		span {
+			padding-left:10px;
+			font: {
+				size:$baseFontSize;
+				weight:normal;
+			}
+			color:red
+		}
+		input {
+			@include border;
+			width:100px;
+			height:30px;
+			padding-left:5px;
+			margin-left:10px;
+			background-color:#fff;
+			color:#999;
+		}
+	}
+	.now_position {
+		@extend %fr;
+		text-align:left;
+	}
+}

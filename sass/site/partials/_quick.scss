@@ -1,0 +1,58 @@
+.quick_link {
+	@extend %clearfix;
+	@extend %fl;
+	@at-root .quick_link_wrap {
+		//@extend %overHidden;
+	}
+	>li {
+		@extend %fl;
+		&.active {
+			> a {
+				color:$baseHoverColor
+			}
+		}
+		*zoom:1;
+		>a {
+			@include display;
+			@include font(14px,bold);
+			color:$baseLinkColor;
+			padding:32px 20px 30px;
+			@if $lte8 {
+				padding:32px 15px 30px \9;
+			}
+			&:hover{
+				color:$baseHoverColor
+			}
+			&.login_button {
+				padding:0;
+				margin:25px 0 0 15px;
+				font-size:12px;
+				@include border($color:#333);
+				@include button($weight:normal);
+			}
+			&.login_button:hover {
+				@include border($color:$primaryColor);
+				background-color:$primaryColor;
+				color:$bgHoverColor;
+			}
+		}
+	}
+	.enter_list {
+		@extend %drop_list;
+		top:80px;
+		left:0;
+		background-color:#f7f7f7;
+		li {
+			@include border(bottom);
+		}
+		a {
+			@include display;
+			padding:10px 0;
+			color:$baseLinkColor;
+			text-align:center;
+			&:hover{
+				color:$baseHoverColor
+			}
+		}
+	}
+}

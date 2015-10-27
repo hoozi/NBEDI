@@ -1,0 +1,172 @@
+.notice {
+	@extend %fwidth;
+	@include border($side:bottom);
+	padding-top:10px;
+	.notice_inner {
+		@extend %wrap_center;
+		position:relative;
+		bottom:-1px;
+		.i7 {
+			@include display;
+  			@include sprite($i7);
+  			position:absolute;
+  			top:20px;
+  			right:20px;
+		}
+	}
+}
+@each $types,$colors in $message-types {
+	#message-#{$types} {
+		@extend %message;
+		color: map-get($colors,text);
+		background-color: map-get($colors,background-color);
+		border-color: map-get($colors,border);
+	}
+}
+
+//banner
+.banner{
+	@extend %fwidth;
+	@extend %overHidden;
+	position:relative;
+	height:400px;
+	//background-color: $placeholderBg;
+	.banner_inner{
+		//@extend %width;
+		@include center($width:1920px);
+		height:400px;
+	}
+	img {
+		@include display;
+	}
+	.banner_button{
+		@extend %auto;
+		@include center($width:$baseSiteWidth);
+		margin-left:-345px;
+		bottom:80px;
+		height:10px;
+		z-index:$baseZindex+1;
+		a {
+			@include display(inline-block);
+			margin-left:10px;
+			@include sprite($i20);
+			&.cycle-pager-active,
+			&:hover {
+				@include sprite($i19);
+			}
+		}
+	}
+}
+
+.latest_news {
+	.lastest_news_inner {
+		@extend %wrap_center;
+		@extend %clearfix;
+		.i2{
+			@include display;
+			@include sprite($i2);
+			@extend %fl;
+			margin:20px 10px 0 0;
+		}
+		.lastest_news_list {
+			@extend %fl;
+			@extend %overHidden;
+			@include border(right);
+			padding:20px 0;
+			height:20px;
+			li {
+				@extend %fl;
+				margin-right:50px;
+				height:20px;
+				line-height:20px;
+				a,span {
+					@include display(inline-block);
+					@extend %fl;
+				}
+				a{
+					@include text_ell(245px);
+					color:$baseLinkColor;
+					&:hover {
+						color:$baseHoverColor;
+					}
+				}
+				span {
+					color:#999;
+					margin-left:20px;
+				}
+				.i1{
+					@include sprite($i1);
+					@include display;
+					@extend %fl;
+					margin:5px 10px 0 0;
+				}
+			}
+		}
+		.news_more {
+			@extend %fl;
+			margin:20px 0 0 20px;
+			line-height:20px;
+			color:$baseLinkColor;
+			&:hover {
+				color:$baseHoverColor;
+			}
+		}
+	}
+
+}
+
+$gridBorderColor:('#286eb6','#399c0b','#e55b5b');
+.grid {
+	padding:25px 0;
+	background-color:#f7f7f7;
+	.grid_inner {
+		@extend %wrap_center;
+		@extend %clearfix;
+		@extend %overHidden;
+		@include border(bottom);
+		@for $i from 1 through 3 {
+			.grid_item#{$i} {
+				@extend %fl;
+				@include col(3);
+				h2 {
+					@include font(14px,$weight:bold);
+					padding-bottom:10px;
+					@extend %overHidden;
+				}
+				@for $j from 1 through 3 {
+					.grid_title#{$j} {
+						@include border(bottom,2px, unquote(nth($gridBorderColor,$i)));
+					}
+				}
+				ul {
+					@include border($not:(top,bottom));
+					@extend %clearfix;
+					@extend %overHidden;
+					padding:15px 10px;
+					height:75px;
+					position:relative;
+					background-color:#fff;
+					li{
+						@extend %fl;
+						padding:0 4px 13px;
+						word-break:break-all;
+						word-wrap:break-word;
+						white-space:nowrap;
+						a {
+							@include display;
+							color:$baseLinkColor;
+							&:hover{
+								color:$baseHoverColor;
+							}
+						}
+					}
+				}
+				@if $i==2 {
+					ul {
+						border:0;
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>首页</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="css/site.min.css" rel="stylesheet">
+<!-- @if NODE_ENV='production' -->
+<script src="../src/vendors/jquery/jquery.min.js"></script>
+<script src="../src/vendors/jquery-cycle2/build/jquery.cycle2.js"></script>
+<script src="../src/components/jquery.select.js"></script>
+<!-- @endif -->
+<!-- @if NODE_ENV='over' -->
+<script src="js/edi.min.js"></script>
+<!-- @endif -->
+</head>
+<body>
+<!-- @include components/index/_notice.html -->
+<!-- @include components/common/_header.html -->
+<!-- @include components/index/_banner.html -->
+<!-- @include components/index/_news.html -->
+<!-- @include components/index/_grid.html -->
+<!-- @include components/common/_footer.html -->
+</body>
+</html>

@@ -1,0 +1,192 @@
+
+<!-- 新船登记 -->
+<div class="service_form">
+	<table cellspacing="0" cellpadding="0" width="100%" class="form_group">
+		<col width="140" />
+		<col width="" />
+		<col width="140" />
+		<col width="" />
+		<col width="140" />
+		<col width="" />
+		<tr>
+			<th class="bb"><span>*</span>船舶代码</th>
+			<td class="bl bb"><input type="radio" name="" id="" class="form_rad">劳斯登记号　　　<input type="radio" name="" id="" class="form_rad">中心登记号</td>
+			<th class="bl bb"><span>*</span>船舶类型代码</th>
+			<td class="bl bb">
+				<select name="" id="" class="form_sel form_base_w">
+					<option value="1">aaa</option>
+				</select>
+			</td>
+			<th class="bl bb"><span>*</span>中文描述</th>
+			<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+		</tr>
+		<tr>
+			<th class="bb"><span>*</span>英文描述</th>
+			<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+			<th class="bl bb">船舶代理</th>
+			<td class="bl bb">
+				<select name="" id="" class="form_sel form_base_w">
+					<option value="1">aaa</option>
+				</select>
+			</td>
+			<th class="bl bb">总箱量</th>
+			<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+		</tr>
+		<tr>
+			<th class="bb">总吨位</th>
+			<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+			<th class="bl bb">净吨位</th>
+			<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+			<th class="bl bb">船舶长度</th>
+			<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+		</tr>
+		<tr>
+			<th class="bl bb">船舶宽度</th>
+			<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+			<th class="bl bb">班轮标记</th>
+			<td class="bl bb">
+				<select name="" id="" class="form_sel form_base_w">
+					<option value="1">aaa</option>
+				</select>
+			</td>
+			<th class="bl bb">船舶码头代码</th>
+			<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+		</tr>
+		<tr>
+			<th class="bb">Cosco代码</th>
+			<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+			<th class="bl bb">船舶呼号</th>
+			<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+			<th class="bl bb">MMSI识别代码</th>
+			<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+		</tr>
+		<tr>
+			<th class="bb">海关英文船名</th>
+			<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+			<th class="bl bb">国籍</th>
+			<td class="bl bb">
+				<select name="" id="" class="form_sel form_base_w">
+					<option value="1">aaa</option>
+				</select>
+			</td>
+			<th class="bl bb">备注</th>
+			<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+		</tr>
+		<tr>
+			<th class="bb">船舶经营人</th>
+			<td class="bl bb" colspan="5">
+				<div id="add_table">
+				<!-- data-id 为每一项的唯一id 不重复即可 -->
+					<ul class="add_table_left item_wrap">
+						<li class="add_item" data-id="item1"><a href="###">item1</a></li>
+						<li class="add_item" data-id="item2"><a href="###">item2</a></li>
+					</ul>
+					<div class="contrl_button">
+						<button class="add_button">&gt;&gt;</button>
+						<button class="del_button">&lt;&lt;</button>
+					</div>
+					<ul class="add_table_right item_wrap" id="add"></ul>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="bb" colspan="6">
+				<div class="input_group form_button">
+					<input type="button" value="查询" class="search_button">
+				</div>
+			</td>
+		</tr>
+	</table>
+</div>
+<script>
+	var left = {}, 
+	    right = {},
+	    add,
+	    $container = $("#add_table"),
+	    $itemWrap = $container.find(".item_wrap"),
+	    $left = $container.find(".add_table_left"),
+	    $right = $container.find(".add_table_right"),
+	    $addBtn = $container.find(".add_button"),
+	    $delBtn = $container.find(".del_button");
+    init();
+
+    function getItem(item,obj) {
+    	$("li", item).each(function(){
+    		var $this = $(this);
+			obj[$this.data("id")] = outHtml($this);
+    	})
+    }
+
+	function init() {
+		getItem($left, left);
+		getItem($right, right);
+	}
+
+	function render(obj) {
+		var html = "";
+		for(var k in obj) {
+			if(obj[k]) {
+				html+=obj[k];
+			}
+		}
+		return html;
+	}
+
+	function contrlHandler(active) {
+		var $wrap = active=="add"?$left:$right;
+		return function(){
+			var $nowItem = $wrap.find(".active"),
+				id = $nowItem.data("id");
+			active == "add"?
+			(right[id] = left[id],left[id] = ""):
+			(left[id] = right[id],right[id] = "");
+			$left.html(render(left));
+			$right.html(render(right));
+		}
+	}
+
+    function outHtml(el) {
+    	var $clone = $(el).clone();
+    	return $("<p>").append($clone).html();
+    }
+	function removeAllClass(el1,el2,className) {
+		el1.find(el2).removeClass(className);
+	}
+	function addClass() {
+		removeAllClass($itemWrap,"li","active");
+		$(this).addClass("active");
+	}
+	$itemWrap.on("click", "li", addClass);
+	$addBtn.on("click", contrlHandler("add"));
+	$delBtn.on("click", contrlHandler("del"));
+</script>
+<div class="search_result">
+
+	<div class="has_bor">
+		<div class="table_scroll_a">
+		<!-- 字段多的时候可以调整table的width,默认为100% -->
+			<table cellpadding="0" cellspacing="0" width="100%" class="page_table">
+				<thead class="page_table_header">
+					<tr>
+						<th class="nbl">字段1</th>
+						<th>字段2</th>
+						<th>字段3</th>
+						<th>字段4</th>
+					</tr>
+				</thead>
+				<tbody class="page_table_body">
+					<tr>
+						<td class="nbr">1</td>
+						<td class="nblr">2</td>
+						<td class="nblr">3</td>
+						<td class="nbl">4</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="pagination_container">
+			<!-- @include ../common/_pagination.html -->
+		</div>
+	</div>
+</div>
+<!--/新船登记 -->

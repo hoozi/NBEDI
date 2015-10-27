@@ -1,0 +1,10 @@
+.header{
+	@extend %fwidth;
+	position:relative;
+	height:80px;
+	z-index:$baseZindex+2;
+	.header_inner {
+		@extend %wrap_center;
+		height:100%;
+	}
+}

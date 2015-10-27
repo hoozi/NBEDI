@@ -1,0 +1,9 @@
+.account_logo{
+	@include display;
+	@extend %fl;
+	@extend %bg;
+	width:236px;
+	height:80px;
+	padding-right:100px;
+	background-image:url('#{$img-url}ologo.gif');
+}

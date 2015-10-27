@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>报文流转</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="css/site.min.css" rel="stylesheet">
+<script src="js/edi.min.js"></script>
+<script src="js/jPages.min.js"></script>
+</head>
+<body>
+
+<!-- header -->
+<div class="header">
+	<div class="header_inner">
+		
+		<!-- logo -->
+		<a href="###" class="logo"></a>
+		<!--/logo -->
+		
+		<!-- nav -->
+		<div class="nav_warp">
+			<ul class="nav">
+				<li><a href="#" class="active">首页</a></li>
+				<li><a href="#">EDI简介</a></li>
+				<li><a href="#">报文流转</a></li>
+				<li class="J_Nav service">
+					<a href="#">业务服务</a>
+					
+					<!-- drop -->
+					<div id="service" class="service_drop drop_content">
+						<i class="i13"></i>
+						<ul class="link_title">
+							<li><a href="###">集装箱信息</a></li>
+							<li><a href="###">船期信息</a></li>
+							<li><a href="###">业务综合信息</a></li>
+							<li><a href="###">指标统计</a></li>
+							<li><a href="###">船舶信息</a></li>
+							<li><a href="###">集卡信息</a></li>
+							<li><a href="###">散杂货信息</a></li>
+							<li><a href="###">报文传输</a></li>
+						</ul>
+						<div class="link_list_wrap">
+							<ul class="link_list">
+								<li><a href="###">•进出门查询</a></li>
+								<li><a href="###">•国检指令信息查询</a></li>
+								<li><a href="###">•装卸船查询</a></li>
+								<li><a href="###">•海关闸口放行查询</a></li>
+								<li><a href="###">•堆存查询</a></li>
+								<li><a href="###">•双信息出口装船放行</a></li>
+								<li><a href="###">•单箱历史查询</a></li>
+								<li><a href="###">•海关准装指令查询</a></li>
+								<li><a href="###">•海关放行查询</a></li>
+								<li><a href="###">•在场集装箱信息查询</a></li>
+								<li><a href="###">•海关查验查询</a></li>
+								<li><a href="###">•在场温控箱巡查记录</a></li>
+								<li><a href="###">•海关布解控查询</a></li>
+								<li><a href="###">•在场危险品箱信息</a></li>
+								<li><a href="###">•分拨箱查询</a></li>
+								<li><a href="###">•镇司/大榭信业堆存查询</a></li>
+							</ul>
+						</div>
+					</div>
+					<!--/drop -->
+				</li>
+				<li><a href="#">报文代码规则</a></li>
+				<li><a href="#">相关下载</a></li>
+			</ul>
+		</div>
+		<script>
+		var templ = "<li><a href='{{linkUrl}}' title='{{linkName}}' target='_blank'>{{linkName}}</a></li>",
+			data = [
+				{
+					title:"title1",
+					list:[
+						{
+							linkName:"xxxName1",
+							linkUrl:"xxxUrl1"
+						},
+						{
+							linkName:"xxxName2",
+							linkUrl:"xxxUrl2"
+						}
+					]
+				},
+				{
+					title:"title2",
+					list:[
+						{
+							linkName:"xxxName21",
+							linkUrl:"xxxUrl21"
+						},
+						{
+							linkName:"xxxName22",
+							linkUrl:"xxxUrl22"
+						}
+					]
+				}
+			],
+			html = "",
+			timer = null,
+			index = 0,
+			$listContainer = $(".link_list");
+		$(".link_title").on("mouseenter mouseleave", "li", hoverHandler)
+		$listContainer.on("mouseenter mouseleave", timeoutHover(function(){
+			$listContainer.show();
+			$(".link_title").find("a").eq(index).addClass("active");
+		},function(){
+			$listContainer.hide();
+		}))
+		
+		function hoverHandler(e) {
+			var $this = $(this);
+			if(e.type=="mouseenter") {
+				if(timer) {
+					clearTimeout(timer);
+				}
+				index = $this.index();
+				$(".link_title").find("a").removeClass("active");
+				$this.find("a").addClass("active");
+				html = getTabContent(index);
+				$listContainer.show().html(html);
+			} else {
+				$this.find("a").removeClass("active");
+				//$listContainer.hide().empty();
+			}
+		}
+		
+		function timeoutHover(enter,leave) {
+			return function(e) {
+				if(e.type=="mouseenter") {
+					if(timer) {
+						clearTimeout(timer);
+					}
+					enter.call(this)
+				} else {
+					timer = setTimeout(leave,100)
+				}
+			}
+		}
+		
+		//forEach @https://github.com/hoozi/ES5_Array/blob/master/array.js
+		!Array.prototype.forEach && 
+		(
+			Array.prototype.forEach = function(cb) {
+				for(var i=0, len=this.length;i<len;i++) {
+					cb.call(this,this[i],i,this);
+				}
+			}
+		);
+		
+		function getTempl(templ,data) {
+			if(!$.isArray(data)) return;
+			var list = "";
+			data.forEach(function(v, k){
+				list+=templToHtml(templ, v)
+			})
+			return list;
+		}
+		
+		function templToHtml(templ, data) {
+			for(var k in data) {
+				templ=templ.replace(new RegExp("\\{\\{"+k+"\\}\\}","g"), data[k])
+			}
+			return templ
+		}
+		function getTabContent(index) {
+			return data[index]&& typeof data[index]["list"]!="undefined"?getTempl(templ, data[index]["list"]):""
+		}
+		</script>
+		<!--/nav -->
+		
+		<!-- quick_link -->
+		<div class="quick_link_wrap">
+			<ul class="quick_link">
+				<li><a href="###" class="login_button">登录</a></li>
+				<li><a href="###">一站式服务</a></li>
+				<li class="J_Nav enter">
+					<a href="###">网络入口</a>
+					<ul class="enter_list drop_content">
+						<li><a href="###">电信用户入口</a></li>
+						<li><a href="###">网通用户入口</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<!--/quick_link -->
+	</div>
+</div>
+<script>
+	$(".J_Nav").hover(function(){
+		$(this).addClass("active");
+	},function(){
+		$(this).removeClass("active");
+	})
+</script>
+<!-- /header -->
+
+<!-- sub_banner -->
+<div class="sub_banner">
+	<div class="sub_banner_inner">
+		<img src="imgs/abanner.jpg" alt="">
+	</div>
+</div>
+<!--/sub_banner -->
+
+<!-- main -->
+<div class="sub_main">
+	<div class="sub_main_inner">
+		
+		<!-- sidebar -->
+		<div class="sidebar goto_sidebar">
+			<h2 class="page_title">报文代码规则</h2>
+			<div class="sidebar_box">
+				<div class="sidebar_box_header">
+					<h2 class="has_sub"><a href="###">动态查询</a></h2>
+				</div>
+				<div class="sidebar_box_content">
+					<ul>
+						<li><a href="###">船公司代码</a></li>
+						<li><a href="###">箱主代码</a></li>
+						<li><a href="###">航线代码</a></li>
+						<li><a href="###">国别代码</a></li>
+						<li><a href="###">CFS集装箱报文流转图示</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="sidebar_box">
+				<div class="sidebar_box_header">
+					<h2 class="has_sub"><a href="###">代码规则</a></h2>
+				</div>
+				<div class="sidebar_box_content">
+					<ul>
+						<li><a href="###">集装箱箱型尺寸代码</a></li>
+						<li><a href="###">集装箱类型</a></li>
+						<li><a href="###">尺寸代码</a></li>
+						<li><a href="###">类型与尺寸的查询参考表</a></li>
+						<li><a href="###">船舶名称代码</a></li>
+						<li><a href="###">EDI平台文件说明</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="sidebar_box">
+				<div class="sidebar_box_header">
+					<h2><a href="###">代码下载</a></h2>
+				</div>
+			</div>
+			<div class="sidebar_box last_sidebar_box">
+				<div class="sidebar_box_header">
+					<h2><a href="###">报文下载</a></h2>
+				</div>
+			</div>
+		</div>
+		<!--/sidebar -->
+		<!-- content -->
+		<div class="content">
+			<div class="now_position">
+				<span>当前位置:</span><a href="###">首页</a><span>&gt;</span><a href="###">报文代码规则</a>
+			</div>
+			<div class="content_item">
+				<div class="content_item_header">
+					<span>船公司代码</span>
+				</div>
+				<div class="content_item_content">
+					<table cellspacing="0" cellpadding="0" width="100%" class="page_table">
+						<thead class="page_table_header">
+							<tr>
+								<th>NO.</th>
+								<th>公司代码</th>
+								<th>公司名称</th>
+							</tr>
+						</thead>
+		
+						<!-- 每页20条 自行添加-->
+						<tbody id="ship_code" class="page_table_body">
+							<tr>  
+								<td >1</td>
+								<td class="page_table_bg">81890</td>
+								<td >81890</td>
+							</tr>
+							<tr>  
+								<td >2</td>
+								<td class="page_table_bg">81890</td>
+								<td >81890</td>
+							</tr>
+							<tr>  
+								<td >3</td>
+								<td class="page_table_bg">81890</td>
+								<td >81890</td>
+							</tr>
+						</tbody>
+						<tfoot class="page_table_footer">
+							<tr>
+								<td colspan="3">
+									<div class="pagination" id="ship_code_pagination"></div>
+								</td>
+							</tr>
+						</tfoot>		
+					</table>
+				</div>
+				<script>
+				$("#ship_code_pagination").jPages({
+					containerID: "ship_code",
+					previous: "〈",
+					next:"〉",
+					perPage:15, //每页的数量
+					midRange:10,//中间数
+					delay: 0, 
+					fallback:0
+				})
+				</script>
+			</div>
+			<div class="content_item">
+				<div class="content_item_header">
+					<span>集装箱箱型尺寸代码</span>
+				</div>
+				<div class="content_item_content">
+		本标准根据ISO／TC104集装箱标准化技术委员会起草和发布的集装箱国际标准而编制。本标准引用ISO6346：1995《集装箱--代码、识别和标记》的版本是在1997年10月获得各国投票通过的最新版本。使用者在引用该国际标准时需注意ISO正式颁布和实施的日期。本标准是国际集装箱运输EDI标准体系交通行业系列标准之一。ISO6346规定的集装箱类型和尺寸代码作为国际集装箱设备的必备标识符；应与箱主代码和箱号等必备标识符组配标识，用于 <br>国际集装箱运输EDI信思标识、处理与交换。 <br>本标准的附录A和附录B是提示的附录。 <br>本标准由中华人民共和国交通部提出并归口。 <br>本标准起草单位 ：交通部标准计量研究所 、交通部水运科学研究所 <br>本标准主要起草人 ：孙黎莹 张静轩 华晓江 <br>中华人民共和国交通行业标准 <br>--- 集装箱类型 与 尺寸代码 代码表下载 eqv ISO 6346 :1995 <br>1.范围 <br>本标准等效采用ISO 6346《集装箱--代 码 、识别和标记》规定的系列1通用、专用集装箱类型和尺寸代码。 <br>本标准适用于从事国际集装箱运输的系列1标准集装箱的设备标识和EDI报文等信息的处理与交换。 <br>2.引用标准 <br>下列标准包含的条文，通过在本标准中引用而构成为本标准的条文。在标准出版时，所示版本均为有效。所有标准都会被修订，使用本标准的各方应探讨使用下列标准最新版本的可能性。 <br>ISO 668: 1995系列1集装箱--类型、外部尺寸和额定值。 <br>ISO 830: 1995 集装--术语 <br>ISO 1161: 1995 系列1集装箱 <br>ISO 1496: 1990 系列1集装箱--技术条件和试验方法 <br>ISO 6346: 1995 集装箱--代码、识别和标记 <br>3.分类原则 <br>3.1 集装箱类型按运输方式、货物类别，箱体特征等原则分类。 <br>3.2 集装箱尺寸按箱体的外部长度，宽度和高度公称尺寸和最小内部尺寸分组，对应于系列1集装箱的各类箱型代码。 <br>4.代码结构 <br>4.1 集装箱类型代码引用ISO 6346的第4.2.2条的规定。箱型代码结构由两位字符表示： <br>X X <br>- - <br>| | <br>| ---箱型编号 <br>----------箱型标识符 <br>4.2 集装箱尺寸代码引用ISO 6346 的附录D的规定。尺寸代码结构由两位字符表示： <br>X X <br>- - <br>| | <br>| ---箱高和箱宽代码 <br>----------箱长代码 <br>注: 第1位由一个字符表示箱长； <br>第2位由一个字符表示箱宽和箱高。 <br>5.代码表 <br>5.1 集装箱类型代码表 <br>本组代码采用ISO 6346附表E中的表E1；见表1 <br>注: 原代号指ISO 6346的1984年版本规定的箱型代号。 <br>5.2 集装箱尺寸代码表 <br>本组代码采用ISO 6346附表D中的表D1和表D2；见表2和表3 <br>6.使用说明 <br>6.1 按照ISO 6364中第6章“标记的标志方法”，箱型和尺寸代码应作为一个整体在集装箱上标识。其组配代码结构为： <br>XX XX <br>-- -- <br>| | <br>| ---箱型代码 <br>----------尺寸代码 <br>例如: 22G1指箱长为20英尺(6068mm)，箱宽为8英尺(2438mm)和箱高为8英尺6英寸(2591mm)，上方有透气罩的通用集装箱。 <br>6.2 本标准附录A（ 提 示 的 附 录 ）中给出部分国内集装箱类型与尺寸的查询参考表。 <br>由于ISO 6346己作修订，1995年版修订后的箱型比1984年版的箱型代码标识改变较大，使用中应注意记录实际箱体上标识的代码与编号；新生产的集装箱则应标注ISO 6346新版本的箱型代码。 <br>6.3 在记录箱体信息时，应将类型。尺寸代码与箱主代码，箱号等信息组配标识。本标准在附录B(提示的附录）中给出ISO 6346第6章规定的集装箱识别标记及其代码的布置图样。 <br>
+				</div>
+			</div>
+			<div class="content_item">
+				<div class="content_item_header">
+					<span>集装箱类型</span>
+				</div>
+				<div class="content_item_content">
+					<table cellpadding="0" cellspacing="0" width="100%" class="page_table">
+						<thead class="page_table_header">
+							<tr>
+								<td colspan="6">隔热层K=0.7W/(M2.K)</td>
+							</tr>
+							<tr>
+								<td colspan="2">&nbsp;</td>
+								<td>表一</td>
+								<td colspan="3">&nbsp;</td>
+							</tr>
+							<tr>
+								<th class="important">代码/原代号</th>
+								<th class="important">箱型</th>
+								<th class="important">箱型群组代码</th>
+								<th class="important">主要特征</th>
+								<th class="important">箱型代码</th>
+								<th class="important">原代码</th>
+							</tr>
+						</thead>
+						<tbody class="page_table_body">
+						    <!-- index:1 -->
+							  <tr>
+							    <td rowspan="10">G/0</td>
+							    <td rowspan="10">通用集装箱 (无通风装置)</td>
+							    <td rowspan="10" class="page_table_bg">GP</td>
+							    <td class="page_table_bg">一端或两端有箱门</td>
+							    <td class="page_table_bg">G0</td>
+							    <td>00</td>
+							  </tr>
+							  <tr>
+							    <td class="page_table_bg">货物的上方有透气罩</td>
+							    <td class="page_table_bg">G1</td>
+							    <td>10/11</td>
+							  </tr>
+							  <tr>
+							    <td class="page_table_bg">一端或两端有箱门,并且在一侧或两侧设'全开'箱门</td>
+							    <td class="page_table_bg">G2</td>
+							    <td>02</td>
+							  </tr>
+							  <tr>
+							    <td class="page_table_bg">一端或两端有箱门,并且在一侧或两侧设'局部'箱门</td>
+							    <td class="page_table_bg">G3</td>
+							    <td>03</td>
+							  </tr>
+							  <tr>
+							    <td class="page_table_bg">备用号</td>
+							    <td class="page_table_bg">G4</td>
+							    <td>04</td>
+							  </tr>
+							  <tr>
+							    <td class="page_table_bg">备用号</td>
+							    <td class="page_table_bg">G5</td>
+							    <td>05</td>
+							  </tr>
+							  <tr>
+							    <td class="page_table_bg">备用号</td>
+							    <td class="page_table_bg">G6</td>
+							    <td>06</td>
+							  </tr>
+							  <tr>
+							    <td class="page_table_bg">备用号</td>
+							    <td class="page_table_bg">G7</td>
+							    <td>07</td>
+							  </tr>
+							  <tr>
+							    <td class="page_table_bg">备用号</td>
+							    <td class="page_table_bg">G8</td>
+							    <td>08</td>
+							  </tr>
+							  <tr>
+							    <td class="page_table_bg">备用号</td>
+							    <td class="page_table_bg">G9</td>
+							    <td>09</td>
+							  </tr>
+		
+							  <!-- index:2 -->
+							  <tr>
+							    <td rowspan="10">G/0</td>
+							    <td rowspan="10">通用集装箱 (无通风装置)</td>
+							    <td rowspan="10" class="page_table_bg">GP</td>
+							    <td class="page_table_bg">一端或两端有箱门</td>
+							    <td class="page_table_bg">G0</td>
+							    <td>00</td>
+							  </tr>
+							  <tr>
+							    <td class="page_table_bg">货物的上方有透气罩</td>
+							    <td class="page_table_bg">G1</td>
+							    <td>10/11</td>
+							  </tr>
+							  <tr>
+							    <td class="page_table_bg">一端或两端有箱门,并且在一侧或两侧设'全开'箱门</td>
+							    <td class="page_table_bg">G2</td>
+							    <td>02</td>
+							  </tr>
+							  <tr>
+							    <td class="page_table_bg">一端或两端有箱门,并且在一侧或两侧设'局部'箱门</td>
+							    <td class="page_table_bg">G3</td>
+							    <td>03</td>
+							  </tr>
+							  <tr>
+							    <td class="page_table_bg">备用号</td>
+							    <td class="page_table_bg">G4</td>
+							    <td>04</td>
+							  </tr>
+							  <tr>
+							    <td class="page_table_bg">备用号</td>
+							    <td class="page_table_bg">G5</td>
+							    <td>05</td>
+							  </tr>
+							  <tr>
+							    <td class="page_table_bg">备用号</td>
+							    <td class="page_table_bg">G6</td>
+							    <td>06</td>
+							  </tr>
+							  <tr>
+							    <td class="page_table_bg">备用号</td>
+							    <td class="page_table_bg">G7</td>
+							    <td>07</td>
+							  </tr>
+							  <tr>
+							    <td class="page_table_bg">备用号</td>
+							    <td class="page_table_bg">G8</td>
+							    <td>08</td>
+							  </tr>
+							  <tr>
+							    <td class="page_table_bg">备用号</td>
+							    <td class="page_table_bg">G9</td>
+							    <td>09</td>
+							  </tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="content_item">
+				<div class="content_item_header">
+					<span>尺寸代码</span>
+				</div>
+				<div class="content_item_content">
+					<table cellpadding="0" cellspacing="0" width="100%" class="page_table">
+						<thead class="page_table_header">
+							<tr>
+								<td>&nbsp;</td>
+								<td>表二</td>
+								<td colspan="2">&nbsp;</td>
+							</tr>
+							<tr>
+								<th class="important">代码</th>
+								<th class="important">箱</th>
+								<th class="important">长</th>
+								<th class="important">&nbsp;</th>
+							</tr>
+							<tr>
+								<td class="important">--</td>
+								<td class="important">mm</td>
+								<td class="important">ft</td>
+								<td class="important">in</td>
+							</tr>
+						</thead>
+						<tbody class="page_table_body">
+						     <tr>
+						     	<td>1</td>
+						     	<td class="page_table_bg">2911</td>
+						     	<td>10</td>
+						     	<td>--</td>
+						     </tr>
+						     <tr>
+						     	<td>1</td>
+						     	<td class="page_table_bg">2911</td>
+						     	<td>10</td>
+						     	<td>--</td>
+						     </tr>
+						     <tr>
+						     	<td>1</td>
+						     	<td class="page_table_bg">2911</td>
+						     	<td>10</td>
+						     	<td>--</td>
+						     </tr>
+						     <tr>
+						     	<td>1</td>
+						     	<td class="page_table_bg">2911</td>
+						     	<td>10</td>
+						     	<td>--</td>
+						     </tr>
+						</tbody>
+					</table>
+					<table cellpadding="0" cellspacing="0" width="100%" class="page_table page_table_mt">
+						<thead class="page_table_header">
+							<tr>
+								<td>&nbsp;</td>
+								<td>表三</td>
+								<td colspan="2">&nbsp;</td>
+							</tr>
+							<tr>
+								<th class="important">代码</th>
+								<th class="important">箱</th>
+								<th class="important">长</th>
+								<th class="important">&nbsp;</th>
+							</tr>
+							<tr>
+								<td class="important">--</td>
+								<td class="important">mm</td>
+								<td class="important">ft</td>
+								<td class="important">in</td>
+							</tr>
+						</thead>
+						<tbody class="page_table_body">
+						     <tr>
+						     	<td>1</td>
+						     	<td class="page_table_bg">2911</td>
+						     	<td>10</td>
+						     	<td>--</td>
+						     </tr>
+						     <tr>
+						     	<td>1</td>
+						     	<td class="page_table_bg">2911</td>
+						     	<td>10</td>
+						     	<td>--</td>
+						     </tr>
+						     <tr>
+						     	<td>1</td>
+						     	<td class="page_table_bg">2911</td>
+						     	<td>10</td>
+						     	<td>--</td>
+						     </tr>
+						     <tr>
+						     	<td>1</td>
+						     	<td class="page_table_bg">2911</td>
+						     	<td>10</td>
+						     	<td>--</td>
+						     </tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="content_item">
+				<div class="content_item_header">
+					<span>类型与尺寸的查询参考表</span>
+				</div>
+				<div class="content_item_content">
+					<table cellpadding="0" cellspacing="0" width="100%" class="page_table">
+						<thead class="page_table_header">
+							<tr>
+								<td>&nbsp;</td>
+								<td>TW* 尺寸类型代码</td>
+								<td>&nbsp;</td>
+								<td>ISO尺寸类型代码</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<th class="important">类 型</th>
+								<th class="important">箱 长 ft</th>
+								<th class="important">箱 高 ft in</th>
+								<th class="important">1984版本</th>
+								<th class="important">1995版本</th>
+							</tr>
+						</thead>
+						<tbody class="page_table_body" id="type_size_code">
+						     <tr>
+						     	<td>1</td>
+						     	<td class="page_table_bg">2911</td>
+						     	<td>10</td>
+						     	<td class="page_table_bg">--</td>
+						     	<td>--</td>
+						     </tr>
+						     <tr>
+						     	<td>2</td>
+						     	<td class="page_table_bg">2911</td>
+						     	<td>10</td>
+						     	<td class="page_table_bg">--</td>
+						     	<td>--</td>
+						     </tr>
+						</tbody>
+						<tfoot class="page_table_footer">
+							 <tr>
+							 	<td colspan="5">
+							 		<div class="pagination" id="type_size_code_pagination"></div>
+							 	</td>
+							 </tr>
+						</tfoot>
+					</table>
+				</div>
+				<script>
+				$("#type_size_code_pagination").jPages({
+					containerID: "type_size_code",
+					previous: "〈",
+					next:"〉",
+					perPage:1, //每页的数量
+					midRange:10,//中间数
+					delay: 0, 
+					fallback:0
+				})
+				</script>
+			</div>
+			<div class="content_item">
+				<div class="content_item_header">
+					<span>报文下载</span>
+				</div>
+				<div class="content_item_content">
+					<ul class="download_list">
+						<li>
+							<span class="download_name">正式订舱报文</span>
+							<a href="###" class="download_button">下载<i class="i21"></i></a>
+						</li>
+						<li>
+							<span class="download_name">订舱确认报文</span>
+							<a href="###" class="download_button">下载<i class="i21"></i></a>
+						</li>
+						<li>
+							<span class="download_name">装船指示报文</span>
+							<a href="###" class="download_button">下载<i class="i21"></i></a>
+						</li>
+						<li>
+							<span class="download_name">正式订舱报文</span>
+							<a href="###" class="download_button">下载<i class="i21"></i></a>
+						</li>
+						<li>
+							<span class="download_name">订舱确认报文</span>
+							<a href="###" class="download_button">下载<i class="i21"></i></a>
+						</li>
+						<li>
+							<span class="download_name">装船指示报文</span>
+							<a href="###" class="download_button">下载<i class="i21"></i></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!--/content -->
+	</div>
+</div>
+<!--/main -->
+
+<!-- footer -->
+<div class="footer">
+	
+	<!-- footer_top -->
+	<div class="footer_top">
+		<div class="footer_top_inner">
+			<div class="fd_link">
+				<span>友情链接：</span>
+				<div class="ui_select" 
+					data-select-header=".ui_select_text"
+					data-select-content=".ui_select_options"
+					data-select-icon=true
+				>
+					<p class="ui_select_text"><span class="ui_select_default">-友情链接-</span><i class="i10"></i></p>
+					<ul class="ui_select_options">
+						<li class="ui_select_options_item"><a href="###">1</a></li>
+						<li class="ui_select_options_item"><a href="###">2</a></li>
+						<li class="ui_select_options_item"><a href="###">3</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="qr_code"><i class="i17"></i>微信扫码关注我们
+				<div class="qr_wrap">
+					<i class="i18"></i>
+					<img src="imgs/qr.gif" alt="">
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--/footer_top -->
+	
+	<!-- footer_bottom -->
+	<div class="footer_bottom">
+		<div class="footer_bottom_inner">
+			<ul class="footer_info">
+				<li>中心提供7*24小时热诚服务</li>
+				<li><i class="i11"></i>0574-27681890</li>
+				<li><i class="i4"></i>edimaster@nbport.com.cn</li>
+				<li><i class="i5"></i>宁波市北仑区明州路301号宁波港大厦</li>
+			</ul>
+			<ul class="footer_copyright">
+				<li>版权所有©2005宁波港口EDI中心</li>
+				<li>浙ICP备06015188号<i class="i3"></i></li>
+			</ul>
+		</div>
+	</div>
+	<!--/footer_bottom -->
+</div>
+<!--/footer -->
+</body>
+</html>

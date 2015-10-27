@@ -1,0 +1,22 @@
+//所有的mixin和全局变量
+@import 'partials/base';
+
+//所有的components
+@import 'partials/reset'; //重置
+@import 'partials/icons'; //icons
+//@import 'partials/buttons';//按钮
+@import 'partials/forms'; //表单
+@import 'partials/tables'; //表格
+@import 'partials/header'; //头
+@import 'partials/logo'; //logo
+@import 'partials/footer'; //尾
+@import 'partials/nav'; //导航
+@import 'partials/user'; //用户
+//@import 'partials/quick'; //快速导航
+@import 'partials/sub_main'; //子页面main
+//@import 'partials/sub_banner'; //子页面banner
+@import 'partials/sidebar'; //子页面侧边栏
+@import 'partials/content'; //子页面主体内容
+@import 'partials/pagination'; //分页
+
+

@@ -1,0 +1,26 @@
+<!-- notice -->
+<div id="notice" class="notice">
+	<div id="message-warning" class="notice_inner">
+		【重要通知】宁波港口EDI中心将于近期对FTP服务器进行升级，请用户尽快完成对EDI报文收发软件的更新。2015/07/15
+		<a href="javascript:;" class="i7"></a>
+	</div>
+</div>
+<script>
+var $container = $("#notice"),
+	timeout = 10000,
+	isClose = false,
+	timer = null,
+	$close = $("a",$container);
+function close() {
+	if(isClose) return;
+	$container.hide();
+	isClose = true;
+}
+if(timer) {
+	clearTimeout(timer);
+} else {
+	timer = setTimeout(close, timeout);
+}
+$close.on("click", close);
+</script>
+<!--/notice -->

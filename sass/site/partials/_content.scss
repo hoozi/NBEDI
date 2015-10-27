@@ -1,0 +1,49 @@
+.content {
+	@extend %fwidth;
+	.now_position{
+		padding:20px 0;
+		text-align:right;
+		color:#666;
+		span {
+			padding:0 5px;
+		}
+		a {
+			color:#666;
+			&:hover {
+				color:$baseHoverColor;
+			}
+		}
+	}
+	.content_item {
+		padding-bottom:30px;
+		.content_item_header {
+			height:40px;
+			background-color:#f7f7f7;
+			span {
+				@include display;
+				@extend %fl;
+				background-color:#399c0b;
+				padding:0 30px;
+				color:#fff;
+				font:{
+					size: $baseMiddle;
+					weight: bold;
+				}
+				line-height:40px;
+			}
+		}
+		.content_item_content {
+			@extend %overHidden;
+			padding:30px 0 20px;
+			color:#666;
+			line-height:20px;
+			img {
+				@include display;
+				margin:10px auto;
+			}
+			b{
+				color: $baseLinkColor;
+			}
+		}
+	}
+}

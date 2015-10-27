@@ -1,0 +1,41 @@
+.pagination_container {
+	padding:15px 0;
+	text-align:center;
+}
+
+.pagination {
+	@extend %overHidden;
+	text-align:center;
+	a,span{
+		@include display(inline-block);
+		width:24px;
+		height:24px;
+		text-align:center;
+		line-height:24px;
+		font-weight:bold;
+		color:$baseLinkColor;
+	}
+	a {
+		cursor:pointer;
+	}
+	span {
+		line-height:17px;
+		font-family:$fontYaHei;
+	}
+	.jp-previous {
+		font-weight:normal;
+	}
+	.jp-next {
+		@extend .jp-previous;
+	}
+	.jp-disabled {
+		color:#ddd
+	}
+	.jp-hidden {
+
+	}
+	.jp-current {
+		background-color:#286eb6;
+		color:#fff;
+	}
+}

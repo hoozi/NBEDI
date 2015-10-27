@@ -1,0 +1,83 @@
+//开关
+$support-for-ie: true !default;
+$lte7: true !default;
+$lte8: true !default;
+
+//图片路径
+$img-url: '../imgs/';
+
+//font
+$baseFontSize:          12px !default;
+$baseMiddle:            14px !default;
+$baseLarge:             16px !default;
+$baseLarger:            18px !default;
+$baseLargest:           20px !default;
+$baseLineHeight:        1.333 !default;
+$baseFontFamily:        Arial, Helvetica, Tahoma, sans-serif !default;
+$fontCn:                'simsun'; //宋体
+$fontYaHei:             'Microsoft Yahei'; //微软雅黑
+$fontHeiTi:             'SimHei'; //黑体
+
+//字体
+$fontFamily:$fontCn,$baseFontFamily;
+
+//outline
+$outline: none !default;
+
+//主色
+$primaryColor: #339900;
+$bgHoverColor: #ffffff;
+
+//a link color
+$baseLinkColor: #333;
+$baseHoverColor: $primaryColor;
+$linkColor: #666666;
+$baseNavBg: #f7f7f7;
+
+
+//info color
+$message-types: (
+ 	info:(
+		text: null,
+    	background-color: null,
+    	border: null
+ 	),
+ 	warning:(
+		text: #fe8200,
+    	background-color: #fffbef,
+    	border: #f4cc48
+ 	),
+ 	success:(
+		text: null,
+    	background-color: null,
+    	border: null
+ 	),
+ 	error:(
+		text: null,
+    	background-color: null,
+    	border: null
+ 	),
+);
+
+//边距
+$baseMargin: 10px !default;
+$basePadding: 10px !default;
+
+//占位背景色
+$placeholderBg: #cccccc;
+
+//按钮大小
+$buttonHeight:30px;
+$button-map:(
+  small:30px,
+  middle:60px,
+  large:70px,
+  larger:80px,
+  largest:100px
+);
+
+//z-index
+$baseZindex: 100;
+
+//基本宽度
+$baseSiteWidth: 1120px;

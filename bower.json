@@ -1,0 +1,19 @@
+{
+  "name": "edi_fe",
+  "version": "0.0.0",
+  "authors": [
+    "edi"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/vendors",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "1.9.1"
+  }
+}

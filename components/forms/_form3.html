@@ -1,0 +1,73 @@
+
+<!-- 船舶动态计划查询 -->
+<div class="service_form">
+	<table cellspacing="0" cellpadding="0" width="100%" class="form_group">
+		<tr>
+			<th class="bb"><input type="radio" name="" id="" class="form_rad">计划靠泊时间</th>
+			<td class="bl bb">
+				<input type="text" name="" id="" class="form_ipt form_larger_w">
+				<span class="input_text">(时间格式：YYYYMMDD)</span>
+			</td>
+		</tr>
+		<tr>
+			<th class="bb"><input type="radio" name="" id="" class="form_rad">中英文船名/航次</th>
+			<td class="bl bb">
+				<select name="" id="" class="form_sel form_base_w">
+					<option value="1">aaa</option>
+				</select> / <input type="text" name="" id="" class="form_ipt form_larger_w">
+			</td>	
+		</tr>
+		<tr>
+			<th class="bb">申报类型</th>
+			<td class="bl bb"><input type="radio" name="" id="" class="form_rad">全部　　　<input type="radio" name="" id="" class="form_rad">集装箱　　　<input type="radio" name="" id="" class="form_rad">化工油品　　　<input type="radio" name="" id="" class="form_rad">煤炭　　　<input type="radio" name="" id="" class="form_rad">散杂货　　　<input type="radio" name="" id="" class="form_rad">铁矿石　　　<input type="radio" name="" id="" class="form_rad">原油
+			</td>
+			
+		</tr>
+		<tr>
+			<th class="bb">作业单位</th>
+			<td class="bl bb">
+				<select name="" id="" class="form_sel form_base_w">
+					<option value="1">aaa</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+		   <th class="bb">&nbsp;</th>
+			<td class="bl bb">
+				<div class="input_group">
+					<input type="button" value="查询" class="search_button">
+				</div>
+			</td>
+		</tr>
+	</table>
+</div>
+<div class="search_result">
+
+	<div class="has_bor">
+		<div class="table_scroll_a">
+		<!-- 字段多的时候可以调整table的width,默认为100% -->
+			<table cellpadding="0" cellspacing="0" width="100%" class="page_table">
+				<thead class="page_table_header">
+					<tr>
+						<th class="nbl">字段1</th>
+						<th>字段2</th>
+						<th>字段3</th>
+						<th>字段4</th>
+					</tr>
+				</thead>
+				<tbody class="page_table_body">
+					<tr>
+						<td class="nbr">1</td>
+						<td class="nblr">2</td>
+						<td class="nblr">3</td>
+						<td class="nbl">4</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="pagination_container">
+			<!-- @include ../common/_pagination.html -->
+		</div>
+	</div>
+</div>
+<!--/船舶动态计划查询 -->

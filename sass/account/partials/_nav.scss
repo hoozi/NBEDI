@@ -1,0 +1,31 @@
+.account_nav {
+	@extend %fl;
+	ul {
+		@extend %clearfix;
+		li {
+			@extend %fl;
+			a {
+				@include display;
+				padding:0 20px;
+				height:80px;
+				position:relative;
+				line-height:80px;
+				color:#fff;
+				font-weight:bold;
+				.i13 {
+					@extend %hidden;
+					@include sprite($i13);
+					position:absolute;
+					bottom:0;
+					left:50%;
+					margin-left:-5px;
+				}
+				&:hover,&.active {
+					.i13 {
+						@include display;
+					}
+				}
+			}
+		}
+	}	
+}

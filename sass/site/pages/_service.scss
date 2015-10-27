@@ -1,0 +1,30 @@
+.service_main {
+	@extend %fwidth;
+	background:url('../imgs/mbg.gif') repeat-x top left #fff;
+	.service_inner {
+		@extend %wrap_center;
+	}
+	.service_form {
+		padding-bottom:30px;
+	}
+	.search_result {
+		padding-bottom:30px;
+		.has_bor {
+			@include border;
+		}
+		.page_table {
+			th {
+				padding:25px;
+			}
+			td {
+				padding:15px;
+			}
+		}
+	}
+	.info {
+		padding-bottom:30px;
+		.message-warning {
+			line-height:25px;
+		}
+	}
+}

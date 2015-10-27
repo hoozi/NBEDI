@@ -1,0 +1,21 @@
+.account_user {
+	@extend %fl;
+	padding:30px 0 0 50px;
+	span, a {
+		@extend %fl;
+		padding:0 3px;
+		line-height:23px;
+		color:#fff;
+	}
+	.user_name {
+		position:relative;
+		padding-left:23px;
+		.i18 {
+			@include display;
+			@include sprite($i9);
+			position:absolute;
+			left:0;
+			top:0;
+		}
+	}
+}

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>报文流转</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="css/site.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- header -->
+<div class="header">
+	<div class="header_inner">
+		
+		<!-- logo -->
+		<a href="###" class="logo"></a>
+		<!--/logo -->
+		
+		<!-- nav -->
+		<div class="nav_warp">
+			<ul class="nav">
+				<li><a href="#" class="active">首页</a></li>
+				<li><a href="#">EDI简介</a></li>
+				<li><a href="#">报文流转</a></li>
+				<li class="J_Nav service">
+					<a href="#">业务服务</a>
+					
+					<!-- drop -->
+					<div id="service" class="service_drop drop_content">
+						<i class="i13"></i>
+						<ul class="link_title">
+							<li><a href="###">集装箱信息</a></li>
+							<li><a href="###">船期信息</a></li>
+							<li><a href="###">业务综合信息</a></li>
+							<li><a href="###">指标统计</a></li>
+							<li><a href="###">船舶信息</a></li>
+							<li><a href="###">集卡信息</a></li>
+							<li><a href="###">散杂货信息</a></li>
+							<li><a href="###">报文传输</a></li>
+						</ul>
+						<div class="link_list_wrap">
+							<ul class="link_list">
+								<li><a href="###">•进出门查询</a></li>
+								<li><a href="###">•国检指令信息查询</a></li>
+								<li><a href="###">•装卸船查询</a></li>
+								<li><a href="###">•海关闸口放行查询</a></li>
+								<li><a href="###">•堆存查询</a></li>
+								<li><a href="###">•双信息出口装船放行</a></li>
+								<li><a href="###">•单箱历史查询</a></li>
+								<li><a href="###">•海关准装指令查询</a></li>
+								<li><a href="###">•海关放行查询</a></li>
+								<li><a href="###">•在场集装箱信息查询</a></li>
+								<li><a href="###">•海关查验查询</a></li>
+								<li><a href="###">•在场温控箱巡查记录</a></li>
+								<li><a href="###">•海关布解控查询</a></li>
+								<li><a href="###">•在场危险品箱信息</a></li>
+								<li><a href="###">•分拨箱查询</a></li>
+								<li><a href="###">•镇司/大榭信业堆存查询</a></li>
+							</ul>
+						</div>
+					</div>
+					<!--/drop -->
+				</li>
+				<li><a href="#">报文代码规则</a></li>
+				<li><a href="#">相关下载</a></li>
+			</ul>
+		</div>
+		<script>
+		var templ = "<li><a href='{{linkUrl}}' title='{{linkName}}' target='_blank'>{{linkName}}</a></li>",
+			data = [
+				{
+					title:"title1",
+					list:[
+						{
+							linkName:"xxxName1",
+							linkUrl:"xxxUrl1"
+						},
+						{
+							linkName:"xxxName2",
+							linkUrl:"xxxUrl2"
+						}
+					]
+				},
+				{
+					title:"title2",
+					list:[
+						{
+							linkName:"xxxName21",
+							linkUrl:"xxxUrl21"
+						},
+						{
+							linkName:"xxxName22",
+							linkUrl:"xxxUrl22"
+						}
+					]
+				}
+			],
+			html = "",
+			timer = null,
+			index = 0,
+			$listContainer = $(".link_list");
+		$(".link_title").on("mouseenter mouseleave", "li", hoverHandler)
+		$listContainer.on("mouseenter mouseleave", timeoutHover(function(){
+			$listContainer.show();
+			$(".link_title").find("a").eq(index).addClass("active");
+		},function(){
+			$listContainer.hide();
+		}))
+		
+		function hoverHandler(e) {
+			var $this = $(this);
+			if(e.type=="mouseenter") {
+				if(timer) {
+					clearTimeout(timer);
+				}
+				index = $this.index();
+				$(".link_title").find("a").removeClass("active");
+				$this.find("a").addClass("active");
+				html = getTabContent(index);
+				$listContainer.show().html(html);
+			} else {
+				$this.find("a").removeClass("active");
+				//$listContainer.hide().empty();
+			}
+		}
+		
+		function timeoutHover(enter,leave) {
+			return function(e) {
+				if(e.type=="mouseenter") {
+					if(timer) {
+						clearTimeout(timer);
+					}
+					enter.call(this)
+				} else {
+					timer = setTimeout(leave,100)
+				}
+			}
+		}
+		
+		//forEach @https://github.com/hoozi/ES5_Array/blob/master/array.js
+		!Array.prototype.forEach && 
+		(
+			Array.prototype.forEach = function(cb) {
+				for(var i=0, len=this.length;i<len;i++) {
+					cb.call(this,this[i],i,this);
+				}
+			}
+		);
+		
+		function getTempl(templ,data) {
+			if(!$.isArray(data)) return;
+			var list = "";
+			data.forEach(function(v, k){
+				list+=templToHtml(templ, v)
+			})
+			return list;
+		}
+		
+		function templToHtml(templ, data) {
+			for(var k in data) {
+				templ=templ.replace(new RegExp("\\{\\{"+k+"\\}\\}","g"), data[k])
+			}
+			return templ
+		}
+		function getTabContent(index) {
+			return data[index]&& typeof data[index]["list"]!="undefined"?getTempl(templ, data[index]["list"]):""
+		}
+		</script>
+		<!--/nav -->
+		
+		<!-- quick_link -->
+		<div class="quick_link_wrap">
+			<ul class="quick_link">
+				<li><a href="###" class="login_button">登录</a></li>
+				<li><a href="###">一站式服务</a></li>
+				<li class="J_Nav enter">
+					<a href="###">网络入口</a>
+					<ul class="enter_list drop_content">
+						<li><a href="###">电信用户入口</a></li>
+						<li><a href="###">网通用户入口</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<!--/quick_link -->
+	</div>
+</div>
+<script>
+	$(".J_Nav").hover(function(){
+		$(this).addClass("active");
+	},function(){
+		$(this).removeClass("active");
+	})
+</script>
+<!-- /header -->
+
+<!-- sub_banner -->
+<div class="sub_banner">
+	<div class="sub_banner_inner">
+		<img src="imgs/abanner.jpg" alt="">
+	</div>
+</div>
+<!--/sub_banner -->
+
+<!-- main -->
+<div class="sub_main">
+	<div class="sub_main_inner">
+		
+		<!-- sidebar -->
+		<div class="sidebar goto_sidebar">
+			<h2 class="page_title">报文流转</h2>
+			<div class="sidebar_box last_sidebar_box">
+				<div class="sidebar_box_content">
+					<ul>
+						<li><a href="###">进口船图/舱单报文流转图示</a></li>
+						<li><a href="###">集装箱进口双信息放行流转图示</a></li>
+						<li><a href="###">正式定舱、定舱确认、装箱单报文流转图示</a></li>
+						<li><a href="###">集装箱出口流转图示</a></li>
+						<li><a href="###">CFS集装箱报文流转图示</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!--/sidebar -->
+		
+		<!-- content -->
+		<div class="content">
+			<div class="now_position">
+				<span>当前位置:</span><a href="###">首页</a><span>&gt;</span><a href="###">报文流转</a>
+			</div>
+			<div class="content_item">
+				<div class="content_item_header">
+					<span>进口船图/舱单报文流转图示</span>
+				</div>
+				<div class="content_item_content">
+		<b>1.</b> 船代发送进口船图给港区和外理。<br/><br/>
+		
+		<b>2.</b> 船代发送进口舱单给港区和海关。<br/><br/>
+		 
+		<b>3.</b> 港区将形成的卸船报告发送给船代。（此时EDI用户可以在EDI中心主页查到进口箱的卸船信息）<br/><br/>
+		
+		<b>4.</b> 外理发送确认后的船图给海关。（EDI用户随时可以在EDI中心主页查讯单箱历史信息）<br/><br/>
+		<img src="imgs/pic1.jpg" alt=""> 
+				</div>
+			</div>
+			
+		</div>
+		<!--/content -->
+	</div>
+</div>
+<!--/main -->
+
+<!-- footer -->
+<div class="footer">
+	
+	<!-- footer_top -->
+	<div class="footer_top">
+		<div class="footer_top_inner">
+			<div class="fd_link">
+				<span>友情链接：</span>
+				<div class="ui_select" 
+					data-select-header=".ui_select_text"
+					data-select-content=".ui_select_options"
+					data-select-icon=true
+				>
+					<p class="ui_select_text"><span class="ui_select_default">-友情链接-</span><i class="i10"></i></p>
+					<ul class="ui_select_options">
+						<li class="ui_select_options_item"><a href="###">1</a></li>
+						<li class="ui_select_options_item"><a href="###">2</a></li>
+						<li class="ui_select_options_item"><a href="###">3</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="qr_code"><i class="i17"></i>微信扫码关注我们
+				<div class="qr_wrap">
+					<i class="i18"></i>
+					<img src="imgs/qr.gif" alt="">
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--/footer_top -->
+	
+	<!-- footer_bottom -->
+	<div class="footer_bottom">
+		<div class="footer_bottom_inner">
+			<ul class="footer_info">
+				<li>中心提供7*24小时热诚服务</li>
+				<li><i class="i11"></i>0574-27681890</li>
+				<li><i class="i4"></i>edimaster@nbport.com.cn</li>
+				<li><i class="i5"></i>宁波市北仑区明州路301号宁波港大厦</li>
+			</ul>
+			<ul class="footer_copyright">
+				<li>版权所有©2005宁波港口EDI中心</li>
+				<li>浙ICP备06015188号<i class="i3"></i></li>
+			</ul>
+		</div>
+	</div>
+	<!--/footer_bottom -->
+</div>
+<!--/footer -->
+</body>
+</html>

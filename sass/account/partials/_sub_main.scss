@@ -1,0 +1,27 @@
+.sub_main {
+	@extend %fwidth;
+	//@include border($side:bottom,$color:#286eb6,$width:3px);
+	.sub_main_inner {
+		@extend %auto;
+		position:relative;
+		width:840px;
+		min-height:1000px;
+		padding-left:280px;
+	}
+}
+
+.service_form {
+	padding-bottom:30px;
+
+}
+.search_result {
+	padding-bottom:30px;
+	.has_bor{
+			@include border;
+	}
+	td{
+		a {
+			color:#286eb6;
+		}
+	}
+}

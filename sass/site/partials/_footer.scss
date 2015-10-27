@@ -1,0 +1,104 @@
+.footer{
+	@extend %fwidth;
+	color:#333;
+	.footer_top {
+		@include border(bottom);
+		.footer_top_inner {
+			@extend %wrap_center;
+			@extend %clearfix;
+			.fd_link {
+				@extend %fl;
+				padding:15px 0;
+				>span {
+					@extend %fl;
+					height:30px;
+					line-height:30px;
+				}
+				.ui_select {
+					@extend %fl;
+					@include select($width:230px,$height:30px);
+				}
+			}
+			.qr_code {
+				@extend %fr;
+				position:relative;
+				padding:25px 95px 0 0;
+				.i17 {
+					@include display;
+					@include sprite($i17);
+					position:absolute;
+					left:-20px;
+					top:25px;
+				}
+				.qr_wrap {
+					@include border;
+					padding:5px;
+					position:absolute;
+					right:0;
+					top:-10px;
+					background-color:#fff;
+					img{
+						@include display;
+					}
+					.i18 {
+						@include display;
+						@include sprite($i18);
+						position:absolute;
+						left:-6px;
+						top:50%;
+						margin-top:-4px;
+					}
+				}
+			}
+		}
+	}
+	.footer_bottom_inner {
+		@extend %wrap_center;
+		@extend %clearfix;
+		@at-root & li {
+			@extend %fl;
+			position:relative;
+		}
+		.footer_info {
+			@extend %fl;
+			padding:20px 0;
+			li {
+				padding:0 20px 0 20px;
+				.i11,
+				.i4,
+				.i5 {
+					@include display;
+					position:absolute;
+					left:0;
+				}
+				.i11 {
+					@include sprite($i11);
+				}
+				.i4 {
+					@include sprite($i4);
+					top:1px;
+				}
+				.i5 {
+					@include sprite($i5);
+					top:-1px;
+				}
+			}
+		}
+		.footer_copyright {
+			@extend %fr;
+			@extend %clearfix;
+			@include border(left);
+			padding:20px 0 20px 20px;
+			li {
+				padding-right:20px;
+				.i3 {
+					@include display;
+					@include sprite($i3);
+					position:absolute;
+					right:0;
+					top:-3px;
+				}
+			}
+		}
+	}
+}

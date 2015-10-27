@@ -1,0 +1,14 @@
+.account_main {
+	border:0;
+}
+.sub_main {
+	@extend %fwidth;
+	@include border($side:bottom,$color:#286eb6,$width:3px);
+	.sub_main_inner {
+		@extend %auto;
+		position:relative;
+		width:840px;
+		min-height:700px;
+		padding-left:280px;
+	}
+}

@@ -1,0 +1,12 @@
+.header{
+	@extend %fwidth;
+	position:relative;
+	height:80px;
+	z-index:$baseZindex+2;
+	background-color:#286eb6;
+	.header_inner {
+		@extend %wrap_center;
+		@extend %clearfix;
+		height:100%;
+	}
+}

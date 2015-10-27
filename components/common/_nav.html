@@ -1,0 +1,117 @@
+
+<!-- nav -->
+<div class="nav_warp">
+	<ul class="nav">
+		<li><a href="#" class="active">首页</a></li>
+		<li><a href="#">EDI简介</a></li>
+		<li><a href="#">报文流转</a></li>
+		<li class="J_Nav service">
+			<a href="#">业务服务</a>
+			<!-- @include _drop.html -->
+		</li>
+		<li><a href="#">报文代码规则</a></li>
+		<li><a href="#">相关下载</a></li>
+	</ul>
+</div>
+<script>
+var templ = "<li><a href='{{linkUrl}}' title='{{linkName}}' target='_blank'>{{linkName}}</a></li>",
+	data = [
+		{
+			title:"title1",
+			list:[
+				{
+					linkName:"xxxName1",
+					linkUrl:"xxxUrl1"
+				},
+				{
+					linkName:"xxxName2",
+					linkUrl:"xxxUrl2"
+				}
+			]
+		},
+		{
+			title:"title2",
+			list:[
+				{
+					linkName:"xxxName21",
+					linkUrl:"xxxUrl21"
+				},
+				{
+					linkName:"xxxName22",
+					linkUrl:"xxxUrl22"
+				}
+			]
+		}
+	],
+	html = "",
+	timer = null,
+	index = 0,
+	$listContainer = $(".link_list");
+$(".link_title").on("mouseenter mouseleave", "li", hoverHandler)
+$listContainer.on("mouseenter mouseleave", timeoutHover(function(){
+	$listContainer.show();
+	$(".link_title").find("a").eq(index).addClass("active");
+},function(){
+	$listContainer.hide();
+}))
+
+function hoverHandler(e) {
+	var $this = $(this);
+	if(e.type=="mouseenter") {
+		if(timer) {
+			clearTimeout(timer);
+		}
+		index = $this.index();
+		$(".link_title").find("a").removeClass("active");
+		$this.find("a").addClass("active");
+		html = getTabContent(index);
+		$listContainer.show().html(html);
+	} else {
+		$this.find("a").removeClass("active");
+		//$listContainer.hide().empty();
+	}
+}
+
+function timeoutHover(enter,leave) {
+	return function(e) {
+		if(e.type=="mouseenter") {
+			if(timer) {
+				clearTimeout(timer);
+			}
+			enter.call(this)
+		} else {
+			timer = setTimeout(leave,100)
+		}
+	}
+}
+
+//forEach @https://github.com/hoozi/ES5_Array/blob/master/array.js
+!Array.prototype.forEach && 
+(
+	Array.prototype.forEach = function(cb) {
+		for(var i=0, len=this.length;i<len;i++) {
+			cb.call(this,this[i],i,this);
+		}
+	}
+);
+
+function getTempl(templ,data) {
+	if(!$.isArray(data)) return;
+	var list = "";
+	data.forEach(function(v, k){
+		list+=templToHtml(templ, v)
+	})
+	return list;
+}
+
+function templToHtml(templ, data) {
+	for(var k in data) {
+		templ=templ.replace(new RegExp("\\{\\{"+k+"\\}\\}","g"), data[k])
+	}
+	return templ
+}
+function getTabContent(index) {
+	return data[index]&& typeof data[index]["list"]!="undefined"?getTempl(templ, data[index]["list"]):""
+}
+</script>
+<!--/nav -->

@@ -1,0 +1,133 @@
+@mixin font($size:12px,$weight:normal,$fontFamily:null) {
+	font:{
+		size:$size;
+		weight:$weight;
+		family:$fontFamily
+	}
+}
+
+@mixin decoration($unline:none) {
+	text-decoration:$unline;
+}
+
+@mixin prefix($key,$value) {
+	-webkit-#{$key}: $value;
+	 -khtml-#{$key}: $value;
+	   -moz-#{$key}: $value;
+	     -o-#{$key}: $value;
+	        #{$key}: $value;
+}
+
+@mixin border($side:all,$color:#e4e4e4,$width:1px,$type:solid,$not:null) {
+	@if($side==all) {
+		border:$width $type $color;
+		@if $not {
+			@each $br in $not {
+				border-#{$br}:0;
+			}
+		}
+	} @else {
+		border-#{$side}:$width $type $color;
+	}
+}
+
+@mixin center($width: null, $height: null) {
+    position: absolute;
+    @if $height and not $width {
+    	top: 50%;
+    	height: $height;
+    	margin-top: -($height / 2);
+	} @else if $width and not $height {
+		left: 50%;
+		width: $width;
+	    margin-left: -($width / 2);
+	} @else {
+		top: 50%;
+		left: 50%;
+		width: $width;
+		height: $height;
+		margin: -($width / 2) #{0 0} -($height / 2);
+	}
+    //margin: -($width / 2) #{0 0} -($height / 2); 
+}
+
+@mixin float($float:left) {
+  float: $float;
+  @if $lte7 {
+    _display: inline;
+  }
+}
+
+@mixin display($type:block) {
+	display: $type;
+	@if ($type==inline-block and $lte7) {
+		 *display: inline;
+		 *zoom:1;
+	}
+}
+
+@mixin button($size:middle,$weight:bold) {
+	@extend %button;
+	height:$buttonHeight;
+	font-weight:$weight;
+	@each $bsize,$value in $button-map {
+		@if $size==$bsize {
+			width:map-get($button-map,$bsize);
+		}
+	}
+}
+
+@mixin text_ell($width:null) {
+	@extend %text_ell;
+	width: $width;
+}
+
+@mixin col($col) {
+	width: 100%/$col;
+}
+
+//form components
+@mixin select($width:null,$height:null,$icon:true) {
+	@include border;
+	width:$width;
+	height:$height;
+	position:relative;
+	@if $icon {
+		.i10{
+			@include display;
+			@include sprite($i10);
+			position:absolute;
+			right:10px;
+			top:12px;
+		}
+	}
+	.ui_select_text {
+		width:100%;
+		color:#666;
+		line-height:30px;
+		cursor:pointer;
+		span {
+			@include display;
+			padding-left:10px;
+		}
+	}
+	.ui_select_options {
+		@extend %drop_list;
+		@include border;
+		left:-1px;
+		display:block;
+		visibility:hidden;
+		background-color:#fff;
+		li {
+			line-height:25px;
+			a{
+				@include display;
+				padding-left:10px;
+				color:#666;
+				&:hover {
+					background-color:#eee
+				}
+			}
+		}
+	}
+}

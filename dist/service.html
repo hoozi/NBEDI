@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>业务服务</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="css/site.min.css" rel="stylesheet">
+<script src="js/edi.min.js"></script>
+<script src="js/jPages.min.js"></script>
+</head>
+<body>
+
+<!-- header -->
+<div class="header">
+	<div class="header_inner">
+		
+		<!-- logo -->
+		<a href="###" class="logo"></a>
+		<!--/logo -->
+		
+		<!-- nav -->
+		<div class="nav_warp">
+			<ul class="nav">
+				<li><a href="#" class="active">首页</a></li>
+				<li><a href="#">EDI简介</a></li>
+				<li><a href="#">报文流转</a></li>
+				<li class="J_Nav service">
+					<a href="#">业务服务</a>
+					
+					<!-- drop -->
+					<div id="service" class="service_drop drop_content">
+						<i class="i13"></i>
+						<ul class="link_title">
+							<li><a href="###">集装箱信息</a></li>
+							<li><a href="###">船期信息</a></li>
+							<li><a href="###">业务综合信息</a></li>
+							<li><a href="###">指标统计</a></li>
+							<li><a href="###">船舶信息</a></li>
+							<li><a href="###">集卡信息</a></li>
+							<li><a href="###">散杂货信息</a></li>
+							<li><a href="###">报文传输</a></li>
+						</ul>
+						<div class="link_list_wrap">
+							<ul class="link_list">
+								<li><a href="###">•进出门查询</a></li>
+								<li><a href="###">•国检指令信息查询</a></li>
+								<li><a href="###">•装卸船查询</a></li>
+								<li><a href="###">•海关闸口放行查询</a></li>
+								<li><a href="###">•堆存查询</a></li>
+								<li><a href="###">•双信息出口装船放行</a></li>
+								<li><a href="###">•单箱历史查询</a></li>
+								<li><a href="###">•海关准装指令查询</a></li>
+								<li><a href="###">•海关放行查询</a></li>
+								<li><a href="###">•在场集装箱信息查询</a></li>
+								<li><a href="###">•海关查验查询</a></li>
+								<li><a href="###">•在场温控箱巡查记录</a></li>
+								<li><a href="###">•海关布解控查询</a></li>
+								<li><a href="###">•在场危险品箱信息</a></li>
+								<li><a href="###">•分拨箱查询</a></li>
+								<li><a href="###">•镇司/大榭信业堆存查询</a></li>
+							</ul>
+						</div>
+					</div>
+					<!--/drop -->
+				</li>
+				<li><a href="#">报文代码规则</a></li>
+				<li><a href="#">相关下载</a></li>
+			</ul>
+		</div>
+		<script>
+		var templ = "<li><a href='{{linkUrl}}' title='{{linkName}}' target='_blank'>{{linkName}}</a></li>",
+			data = [
+				{
+					title:"title1",
+					list:[
+						{
+							linkName:"xxxName1",
+							linkUrl:"xxxUrl1"
+						},
+						{
+							linkName:"xxxName2",
+							linkUrl:"xxxUrl2"
+						}
+					]
+				},
+				{
+					title:"title2",
+					list:[
+						{
+							linkName:"xxxName21",
+							linkUrl:"xxxUrl21"
+						},
+						{
+							linkName:"xxxName22",
+							linkUrl:"xxxUrl22"
+						}
+					]
+				}
+			],
+			html = "",
+			timer = null,
+			index = 0,
+			$listContainer = $(".link_list");
+		$(".link_title").on("mouseenter mouseleave", "li", hoverHandler)
+		$listContainer.on("mouseenter mouseleave", timeoutHover(function(){
+			$listContainer.show();
+			$(".link_title").find("a").eq(index).addClass("active");
+		},function(){
+			$listContainer.hide();
+		}))
+		
+		function hoverHandler(e) {
+			var $this = $(this);
+			if(e.type=="mouseenter") {
+				if(timer) {
+					clearTimeout(timer);
+				}
+				index = $this.index();
+				$(".link_title").find("a").removeClass("active");
+				$this.find("a").addClass("active");
+				html = getTabContent(index);
+				$listContainer.show().html(html);
+			} else {
+				$this.find("a").removeClass("active");
+				//$listContainer.hide().empty();
+			}
+		}
+		
+		function timeoutHover(enter,leave) {
+			return function(e) {
+				if(e.type=="mouseenter") {
+					if(timer) {
+						clearTimeout(timer);
+					}
+					enter.call(this)
+				} else {
+					timer = setTimeout(leave,100)
+				}
+			}
+		}
+		
+		//forEach @https://github.com/hoozi/ES5_Array/blob/master/array.js
+		!Array.prototype.forEach && 
+		(
+			Array.prototype.forEach = function(cb) {
+				for(var i=0, len=this.length;i<len;i++) {
+					cb.call(this,this[i],i,this);
+				}
+			}
+		);
+		
+		function getTempl(templ,data) {
+			if(!$.isArray(data)) return;
+			var list = "";
+			data.forEach(function(v, k){
+				list+=templToHtml(templ, v)
+			})
+			return list;
+		}
+		
+		function templToHtml(templ, data) {
+			for(var k in data) {
+				templ=templ.replace(new RegExp("\\{\\{"+k+"\\}\\}","g"), data[k])
+			}
+			return templ
+		}
+		function getTabContent(index) {
+			return data[index]&& typeof data[index]["list"]!="undefined"?getTempl(templ, data[index]["list"]):""
+		}
+		</script>
+		<!--/nav -->
+		
+		<!-- quick_link -->
+		<div class="quick_link_wrap">
+			<ul class="quick_link">
+				<li><a href="###" class="login_button">登录</a></li>
+				<li><a href="###">一站式服务</a></li>
+				<li class="J_Nav enter">
+					<a href="###">网络入口</a>
+					<ul class="enter_list drop_content">
+						<li><a href="###">电信用户入口</a></li>
+						<li><a href="###">网通用户入口</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<!--/quick_link -->
+	</div>
+</div>
+<script>
+	$(".J_Nav").hover(function(){
+		$(this).addClass("active");
+	},function(){
+		$(this).removeClass("active");
+	})
+</script>
+<!-- /header -->
+
+<!-- main -->
+<div class="service_main">
+	<div class="service_inner">
+		<div class="content page_header">
+			<b class="page_name">进出门查询<!-- <span>着重说明</span><input type="text" name="" id="" value="请输入登记号"> --></b>
+			<div class="now_position"><span>当前位置:</span><a href="###">首页</a><span>&gt;</span><a href="###">进出门查询</a></div>
+		</div>
+		<div class="service_content">
+			
+			<!-- 进出门查询 -->
+			<div class="service_form">
+				<table cellspacing="0" cellpadding="0" width="100%" class="form_group">
+					<tr>
+						<th class="bb">按类型</th>
+						<td class="bl bb"><input type="radio" name="" id="" class="form_rad">进门查询　　　<input type="radio" name="" id="" class="form_rad">出门查询</td>
+					</tr>
+					<tr>
+						<th class="bb">船名/航次</th>
+						<td class="bl bb">
+							<input type="text" name="" id="" class="form_ipt form_larger_w">
+							<span class="input_text">(请选择船名/航次)</span>
+						</td>
+					</tr>
+					<tr>
+						<th class="bb">提单号</th>
+						<td class="bl bb">
+							<input type="text" name="" id="" class="form_ipt form_larger_w">
+							<span class="input_text">(请输入完整提单号)</span>
+						</td>
+					</tr>
+					<tr>
+						<th class="bb">集装箱号</th>
+						<td class="bl bb">
+							<input type="text" name="" id="" class="form_ipt form_larger_w">
+							<span class="input_text">(请输入完整集装箱号)</span>
+						</td>
+					</tr>
+					<tr>
+						<th class="bb">箱主代码</th>
+						<td class="bl bb">
+							<select name="" id="" class="form_sel form_base_w">
+								<option value="1">aaa</option>
+							</select>
+							<span class="input_text">(请选择箱主代码)</span>
+						</td>
+					</tr>
+					<tr>
+						<th class="bb">&nbsp;</th>
+						<td class="bl bb">
+							<div class="input_group">
+								<input type="button" value="查询" class="search_button">
+								<div class="page_sel_wrap">
+									<b>每页行数</b>
+									<select name="" id="" class="form_sel form_small_w">
+										<option value="10">10</option>
+									</select>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="search_result">
+			
+				<div class="has_bor">
+					<div class="table_scroll_a">
+					<!-- 字段多的时候可以调整table的width,默认为100% -->
+						<table cellpadding="0" cellspacing="0" width="2000" class="page_table">
+							<thead class="page_table_header">
+								<tr>
+									<th class="nbl">字段1</th>
+									<th>字段2</th>
+									<th>字段3</th>
+									<th>字段4</th>
+								</tr>
+							</thead>
+							<tbody class="page_table_body">
+								<tr>
+									<td class="nbr">1</td>
+									<td class="nblr">2</td>
+									<td class="nblr">3</td>
+									<td class="nbl">4</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="pagination_container">
+						
+						<!-- pagination -->
+						<!--
+						jp-previous: 上一页
+						jp-next:     下一页
+						jp-disabled: 禁用
+						jp-hidden:   隐藏
+						jp-current:  当前页
+						-->
+						<div class="pagination">
+							<a class="jp-previous jp-disabled">〈</a>
+							<a class="jp-current">1</a>
+							<a href="#" class="">2</a>
+							<a href="#" class="">3</a>
+							<a href="#" class="">4</a>
+							<a href="#" class="">5</a>
+							<span>...</span>
+							<a>15</a>
+							<a class="jp-next">〉</a>
+						</div>
+						<!--/pagination -->
+					</div>
+				</div>
+			</div>
+			<!--/进出门查询 -->
+		
+			
+			<!-- 镇司/大榭信业堆存查询 -->
+			<div class="service_form">
+				<table cellspacing="0" cellpadding="0" width="100%" class="form_group">
+					<col width="140" />
+					<col width="" />
+					<col width="140" />
+					<col width="" />
+					<col width="140" />
+					<col width="" />
+					<tr>
+						<th class="bb">船名</th>
+						<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+						<th class="bl bb">航次</th>
+						<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+						<th class="bl bb">航向</th>
+						<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+					</tr>
+					<tr>
+						<th class="bb">箱主代码</th>
+						<td class="bl bb">
+							<select name="" id="" class="form_sel form_base_w">
+								<option value="1">aaa</option>
+							</select>
+						</td>
+						<th class="bl bb">箱型</th>
+						<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+						<th class="bl bb">尺寸</th>
+						<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+					</tr>
+					<tr>
+						<th class="bb">内外贸标志</th>
+						<td class="bl bb">
+							<select name="" id="" class="form_sel form_base_w">
+								<option value="1">aaa</option>
+							</select>
+						</td>
+						<th class="bl bb">空重</th>
+						<td class="bl bb">
+							<select name="" id="" class="form_sel form_base_w">
+								<option value="1">aaa</option>
+							</select>
+						</td>
+						<th class="bl bb">排序方式</th>
+						<td class="bl bb">
+							<select name="" id="" class="form_sel form_base_w">
+								<option value="1">aaa</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<th class="bb">进场时间区间</th>
+						<td class="bl bb">
+							<div class="input_group time_group">
+								<input type="text" name="" id="">
+								<b class="group_text">至</b>
+								<input type="text" name="" id="">
+							</div>
+						</td>
+						<th class="bl bb">温控</th>
+						<td class="bl bb">
+							<select name="" id="" class="form_sel form_base_w">
+								<option value="1">aaa</option>
+							</select>
+						</td>
+						<th class="bl bb">危品</th>
+						<td class="bl bb">
+							<select name="" id="" class="form_sel form_base_w">
+								<option value="1">aaa</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<th class="bb">超限</th>
+						<td class="bl bb">
+							<select name="" id="" class="form_sel form_base_w">
+								<option value="1">aaa</option>
+							</select>
+						</td>
+						<th class="bl bb">残损</th>
+						<td class="bl bb">
+							<select name="" id="" class="form_sel form_base_w">
+								<option value="1">aaa</option>
+							</select>
+						</td>
+						<th class="bl bb">提单号</th>
+						<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+					</tr>
+					<tr>
+						<th class="bb">港口</th>
+						<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+						<th class="bl bb">集装箱号</th>
+						<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+						<th class="bl bb">所在码头</th>
+						<td class="bl bb"><input type="radio" name="" id="" class="form_rad">镇司　　　<input type="radio" name="" id="" class="form_rad">大榭信业</td>
+					</tr>
+					<tr>
+						<td class="bb" colspan="6">
+							<div class="input_group form_button">
+								<input type="button" value="查询" class="search_button">
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="search_result">
+			
+				<div class="has_bor">
+					<div class="table_scroll_a">
+					<!-- 字段多的时候可以调整table的width,默认为100% -->
+						<table cellpadding="0" cellspacing="0" width="100%" class="page_table">
+							<thead class="page_table_header">
+								<tr>
+									<th class="nbl">字段1</th>
+									<th>字段2</th>
+									<th>字段3</th>
+									<th>字段4</th>
+								</tr>
+							</thead>
+							<tbody class="page_table_body">
+								<tr>
+									<td class="nbr">1</td>
+									<td class="nblr">2</td>
+									<td class="nblr">3</td>
+									<td class="nbl">4</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="pagination_container">
+						
+						<!-- pagination -->
+						<!--
+						jp-previous: 上一页
+						jp-next:     下一页
+						jp-disabled: 禁用
+						jp-hidden:   隐藏
+						jp-current:  当前页
+						-->
+						<div class="pagination">
+							<a class="jp-previous jp-disabled">〈</a>
+							<a class="jp-current">1</a>
+							<a href="#" class="">2</a>
+							<a href="#" class="">3</a>
+							<a href="#" class="">4</a>
+							<a href="#" class="">5</a>
+							<span>...</span>
+							<a>15</a>
+							<a class="jp-next">〉</a>
+						</div>
+						<!--/pagination -->
+					</div>
+				</div>
+			</div>
+			<!--/镇司/大榭信业堆存查询 -->
+		
+			
+			<!-- 船舶动态计划查询 -->
+			<div class="service_form">
+				<table cellspacing="0" cellpadding="0" width="100%" class="form_group">
+					<tr>
+						<th class="bb"><input type="radio" name="" id="" class="form_rad">计划靠泊时间</th>
+						<td class="bl bb">
+							<input type="text" name="" id="" class="form_ipt form_larger_w">
+							<span class="input_text">(时间格式：YYYYMMDD)</span>
+						</td>
+					</tr>
+					<tr>
+						<th class="bb"><input type="radio" name="" id="" class="form_rad">中英文船名/航次</th>
+						<td class="bl bb">
+							<select name="" id="" class="form_sel form_base_w">
+								<option value="1">aaa</option>
+							</select> / <input type="text" name="" id="" class="form_ipt form_larger_w">
+						</td>	
+					</tr>
+					<tr>
+						<th class="bb">申报类型</th>
+						<td class="bl bb"><input type="radio" name="" id="" class="form_rad">全部　　　<input type="radio" name="" id="" class="form_rad">集装箱　　　<input type="radio" name="" id="" class="form_rad">化工油品　　　<input type="radio" name="" id="" class="form_rad">煤炭　　　<input type="radio" name="" id="" class="form_rad">散杂货　　　<input type="radio" name="" id="" class="form_rad">铁矿石　　　<input type="radio" name="" id="" class="form_rad">原油
+						</td>
+						
+					</tr>
+					<tr>
+						<th class="bb">作业单位</th>
+						<td class="bl bb">
+							<select name="" id="" class="form_sel form_base_w">
+								<option value="1">aaa</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+					   <th class="bb">&nbsp;</th>
+						<td class="bl bb">
+							<div class="input_group">
+								<input type="button" value="查询" class="search_button">
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="search_result">
+			
+				<div class="has_bor">
+					<div class="table_scroll_a">
+					<!-- 字段多的时候可以调整table的width,默认为100% -->
+						<table cellpadding="0" cellspacing="0" width="100%" class="page_table">
+							<thead class="page_table_header">
+								<tr>
+									<th class="nbl">字段1</th>
+									<th>字段2</th>
+									<th>字段3</th>
+									<th>字段4</th>
+								</tr>
+							</thead>
+							<tbody class="page_table_body">
+								<tr>
+									<td class="nbr">1</td>
+									<td class="nblr">2</td>
+									<td class="nblr">3</td>
+									<td class="nbl">4</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="pagination_container">
+						
+						<!-- pagination -->
+						<!--
+						jp-previous: 上一页
+						jp-next:     下一页
+						jp-disabled: 禁用
+						jp-hidden:   隐藏
+						jp-current:  当前页
+						-->
+						<div class="pagination">
+							<a class="jp-previous jp-disabled">〈</a>
+							<a class="jp-current">1</a>
+							<a href="#" class="">2</a>
+							<a href="#" class="">3</a>
+							<a href="#" class="">4</a>
+							<a href="#" class="">5</a>
+							<span>...</span>
+							<a>15</a>
+							<a class="jp-next">〉</a>
+						</div>
+						<!--/pagination -->
+					</div>
+				</div>
+			</div>
+			<!--/船舶动态计划查询 -->
+		
+			
+			<!-- 在场集装箱信息查询 -->
+			<div class="service_form">
+				<table cellspacing="0" cellpadding="0" width="100%" class="form_group">
+					<tr>
+						<th class="bb">箱号</th>
+						<td class="bl bb">
+							<input type="text" name="" id="" class="form_ipt form_larger_w">
+							<span class="input_text">(请输入完整箱号)</span>
+						</td>
+					</tr>
+					<tr>
+						<th class="bb">提单号</th>
+						<td class="bl bb">
+							<input type="text" name="" id="" class="form_ipt form_larger_w">
+							<span class="input_text">(请输入完整提单号)</span>
+						</td>
+					</tr>
+					<tr>
+						<th class="bb">&nbsp;</th>
+						<td class="bl bb">
+							<div class="input_group">
+								<input type="button" value="查询" class="search_button">
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="search_result">
+			
+				<div class="has_bor">
+					<div class="table_scroll_a">
+					<!-- 字段多的时候可以调整table的width,默认为100% -->
+						<table cellpadding="0" cellspacing="0" width="2000" class="page_table">
+							<thead class="page_table_header">
+								<tr>
+									<th class="nbl">字段1</th>
+									<th>字段2</th>
+									<th>字段3</th>
+									<th>字段4</th>
+								</tr>
+							</thead>
+							<tbody class="page_table_body">
+								<tr>
+									<td class="nbr">1</td>
+									<td class="nblr">2</td>
+									<td class="nblr">3</td>
+									<td class="nbl">4</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="pagination_container">
+						
+						<!-- pagination -->
+						<!--
+						jp-previous: 上一页
+						jp-next:     下一页
+						jp-disabled: 禁用
+						jp-hidden:   隐藏
+						jp-current:  当前页
+						-->
+						<div class="pagination">
+							<a class="jp-previous jp-disabled">〈</a>
+							<a class="jp-current">1</a>
+							<a href="#" class="">2</a>
+							<a href="#" class="">3</a>
+							<a href="#" class="">4</a>
+							<a href="#" class="">5</a>
+							<span>...</span>
+							<a>15</a>
+							<a class="jp-next">〉</a>
+						</div>
+						<!--/pagination -->
+					</div>
+				</div>
+			</div>
+			<!--/在场集装箱信息查询 -->
+		
+			
+			<!-- 集装箱水水中转查询 -->
+			<div class="service_form">
+				<table cellspacing="0" cellpadding="0" width="100%" class="form_group">
+					<col width="140" />
+					<col width="" />
+					<col width="140" />
+					<col width="" />
+					<col width="140" />
+					<col width="" />
+					<tr>
+						<th class="bb">所在码头</th>
+						<td class="bl bb"><input type="radio" name="" id="" class="form_rad">镇司　　　<input type="radio" name="" id="" class="form_rad">大榭信业</td>
+						<th class="bl bb">箱主代码</th>
+						<td class="bl bb">
+							<select name="" id="" class="form_sel form_base_w">
+								<option value="1">aaa</option>
+							</select>
+						</td>
+						<th class="bl bb">一程码头</th>
+						<td class="bl bb">
+							<select name="" id="" class="form_sel form_base_w">
+								<option value="1">aaa</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<th class="bb">二程码头</th>
+						<td class="bl bb">
+							<select name="" id="" class="form_sel form_base_w">
+								<option value="1">aaa</option>
+							</select>
+						</td>
+						<th class="bl bb">一程船名/航次</th>
+						<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+						<th class="bl bb">二程码头/航次</th>
+						<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+					</tr>
+					<tr>
+						<th class="bb">箱号</th>
+						<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+						<th class="bl bb">卸载时间段</th>
+						<td class="bl bb">
+							<div class="input_group time_group">
+								<input type="text" name="" id="">
+								<span class="group_text">-</span>
+								<input type="text" name="" id="">
+							</div>
+						</td>
+						<th class="bl bb">箱状态</th>
+						<td class="bl bb"><input type="checkbox" name="" id="" class="form_rad">V　　<input type="checkbox" name="" id="" class="form_rad">Y　　<input type="checkbox" name="" id="" class="form_rad">T　　<input type="checkbox" name="" id="" class="form_rad">O</td>
+					</tr>
+					<tr>
+						<td class="bb" colspan="6">
+							<div class="input_group form_button">
+								<input type="button" value="查询" class="search_button">
+								<div class="page_sel_wrap">
+									<b>每页行数</b>
+									<select name="" id="" class="form_sel form_small_w">
+										<option value="10">10</option>
+									</select>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="search_result">
+			
+				<div class="has_bor">
+					<div class="table_scroll_a">
+					<!-- 字段多的时候可以调整table的width,默认为100% -->
+						<table cellpadding="0" cellspacing="0" width="100%" class="page_table">
+							<thead class="page_table_header">
+								<tr>
+									<th class="nbl">字段1</th>
+									<th>字段2</th>
+									<th>字段3</th>
+									<th>字段4</th>
+								</tr>
+							</thead>
+							<tbody class="page_table_body">
+								<tr>
+									<td class="nbr">1</td>
+									<td class="nblr">2</td>
+									<td class="nblr">3</td>
+									<td class="nbl">4</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="pagination_container">
+						
+						<!-- pagination -->
+						<!--
+						jp-previous: 上一页
+						jp-next:     下一页
+						jp-disabled: 禁用
+						jp-hidden:   隐藏
+						jp-current:  当前页
+						-->
+						<div class="pagination">
+							<a class="jp-previous jp-disabled">〈</a>
+							<a class="jp-current">1</a>
+							<a href="#" class="">2</a>
+							<a href="#" class="">3</a>
+							<a href="#" class="">4</a>
+							<a href="#" class="">5</a>
+							<span>...</span>
+							<a>15</a>
+							<a class="jp-next">〉</a>
+						</div>
+						<!--/pagination -->
+					</div>
+				</div>
+			</div>
+			<!--/集装箱水水中转查询 -->
+			
+			
+			<!-- 新船登记 -->
+			<div class="service_form">
+				<table cellspacing="0" cellpadding="0" width="100%" class="form_group">
+					<col width="140" />
+					<col width="" />
+					<col width="140" />
+					<col width="" />
+					<col width="140" />
+					<col width="" />
+					<tr>
+						<th class="bb"><span>*</span>船舶代码</th>
+						<td class="bl bb"><input type="radio" name="" id="" class="form_rad">劳斯登记号　　　<input type="radio" name="" id="" class="form_rad">中心登记号</td>
+						<th class="bl bb"><span>*</span>船舶类型代码</th>
+						<td class="bl bb">
+							<select name="" id="" class="form_sel form_base_w">
+								<option value="1">aaa</option>
+							</select>
+						</td>
+						<th class="bl bb"><span>*</span>中文描述</th>
+						<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+					</tr>
+					<tr>
+						<th class="bb"><span>*</span>英文描述</th>
+						<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+						<th class="bl bb">船舶代理</th>
+						<td class="bl bb">
+							<select name="" id="" class="form_sel form_base_w">
+								<option value="1">aaa</option>
+							</select>
+						</td>
+						<th class="bl bb">总箱量</th>
+						<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+					</tr>
+					<tr>
+						<th class="bb">总吨位</th>
+						<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+						<th class="bl bb">净吨位</th>
+						<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+						<th class="bl bb">船舶长度</th>
+						<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+					</tr>
+					<tr>
+						<th class="bl bb">船舶宽度</th>
+						<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+						<th class="bl bb">班轮标记</th>
+						<td class="bl bb">
+							<select name="" id="" class="form_sel form_base_w">
+								<option value="1">aaa</option>
+							</select>
+						</td>
+						<th class="bl bb">船舶码头代码</th>
+						<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+					</tr>
+					<tr>
+						<th class="bb">Cosco代码</th>
+						<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+						<th class="bl bb">船舶呼号</th>
+						<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+						<th class="bl bb">MMSI识别代码</th>
+						<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+					</tr>
+					<tr>
+						<th class="bb">海关英文船名</th>
+						<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+						<th class="bl bb">国籍</th>
+						<td class="bl bb">
+							<select name="" id="" class="form_sel form_base_w">
+								<option value="1">aaa</option>
+							</select>
+						</td>
+						<th class="bl bb">备注</th>
+						<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+					</tr>
+					<tr>
+						<th class="bb">船舶经营人</th>
+						<td class="bl bb" colspan="5">
+							<div id="add_table">
+							<!-- data-id 为每一项的唯一id 不重复即可 -->
+								<ul class="add_table_left item_wrap">
+									<li class="add_item" data-id="item1"><a href="###">item1</a></li>
+									<li class="add_item" data-id="item2"><a href="###">item2</a></li>
+								</ul>
+								<div class="contrl_button">
+									<button class="add_button">&gt;&gt;</button>
+									<button class="del_button">&lt;&lt;</button>
+								</div>
+								<ul class="add_table_right item_wrap" id="add"></ul>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="bb" colspan="6">
+							<div class="input_group form_button">
+								<input type="button" value="查询" class="search_button">
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<script>
+				var left = {}, 
+				    right = {},
+				    add,
+				    $container = $("#add_table"),
+				    $itemWrap = $container.find(".item_wrap"),
+				    $left = $container.find(".add_table_left"),
+				    $right = $container.find(".add_table_right"),
+				    $addBtn = $container.find(".add_button"),
+				    $delBtn = $container.find(".del_button");
+			    init();
+			
+			    function getItem(item,obj) {
+			    	$("li", item).each(function(){
+			    		var $this = $(this);
+						obj[$this.data("id")] = outHtml($this);
+			    	})
+			    }
+			
+				function init() {
+					getItem($left, left);
+					getItem($right, right);
+				}
+			
+				function render(obj) {
+					var html = "";
+					for(var k in obj) {
+						if(obj[k]) {
+							html+=obj[k];
+						}
+					}
+					return html;
+				}
+			
+				function contrlHandler(active) {
+					var $wrap = active=="add"?$left:$right;
+					return function(){
+						var $nowItem = $wrap.find(".active"),
+							id = $nowItem.data("id");
+						active == "add"?
+						(right[id] = left[id],left[id] = ""):
+						(left[id] = right[id],right[id] = "");
+						$left.html(render(left));
+						$right.html(render(right));
+					}
+				}
+			
+			    function outHtml(el) {
+			    	var $clone = $(el).clone();
+			    	return $("<p>").append($clone).html();
+			    }
+				function removeAllClass(el1,el2,className) {
+					el1.find(el2).removeClass(className);
+				}
+				function addClass() {
+					removeAllClass($itemWrap,"li","active");
+					$(this).addClass("active");
+				}
+				$itemWrap.on("click", "li", addClass);
+				$addBtn.on("click", contrlHandler("add"));
+				$delBtn.on("click", contrlHandler("del"));
+			</script>
+			<div class="search_result">
+			
+				<div class="has_bor">
+					<div class="table_scroll_a">
+					<!-- 字段多的时候可以调整table的width,默认为100% -->
+						<table cellpadding="0" cellspacing="0" width="100%" class="page_table">
+							<thead class="page_table_header">
+								<tr>
+									<th class="nbl">字段1</th>
+									<th>字段2</th>
+									<th>字段3</th>
+									<th>字段4</th>
+								</tr>
+							</thead>
+							<tbody class="page_table_body">
+								<tr>
+									<td class="nbr">1</td>
+									<td class="nblr">2</td>
+									<td class="nblr">3</td>
+									<td class="nbl">4</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="pagination_container">
+						
+						<!-- pagination -->
+						<!--
+						jp-previous: 上一页
+						jp-next:     下一页
+						jp-disabled: 禁用
+						jp-hidden:   隐藏
+						jp-current:  当前页
+						-->
+						<div class="pagination">
+							<a class="jp-previous jp-disabled">〈</a>
+							<a class="jp-current">1</a>
+							<a href="#" class="">2</a>
+							<a href="#" class="">3</a>
+							<a href="#" class="">4</a>
+							<a href="#" class="">5</a>
+							<span>...</span>
+							<a>15</a>
+							<a class="jp-next">〉</a>
+						</div>
+						<!--/pagination -->
+					</div>
+				</div>
+			</div>
+			<!--/新船登记 -->
+		
+			
+			<!-- 码头-海关船期对照登记 -->
+			<div class="service_form">
+				<table cellspacing="0" cellpadding="0" width="100%" class="form_group">
+					<col width="140" />
+					<col width="" />
+					<col width="140" />
+					<col width="" />
+					<col width="140" />
+					<col width="" />
+					<tr>
+						<th class="bb">码头英文船名</th>
+						<td class="bl bb">
+							<select name="" id="" class="form_sel form_base_w">
+								<option value="1">aaa</option>
+							</select>
+						</td>
+						<th class="bl bb">箱主代码</th>
+						<td class="bl bb">
+							<select name="" id="" class="form_sel form_base_w">
+								<option value="1">aaa</option>
+							</select>
+						</td>
+						<th class="bl bb">一程码头</th>
+						<td class="bl bb">
+							<select name="" id="" class="form_sel form_base_w">
+								<option value="1">aaa</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<th class="bb">码头航次-航向-挂靠码头</th>
+						<td class="bl bb">
+							<select name="" id="" class="form_sel form_base_w">
+								<option value="1">aaa</option>
+							</select>
+						</td>
+						<th class="bl bb">码头航次-航向-挂靠码头</th>
+						<td class="bl bb" colspan="3"><input type="text" name="" id="" class="form_ipt form_midd_w">　<select name="" id="" class="form_sel form_base_w">
+								<option value="1">aaa</option>
+							</select>　<select name="" id="" class="form_sel form_base_w">
+								<option value="1">aaa</option>
+							</select></td>
+					</tr>
+					<tr>
+						<th class="bb">海关航次(*)</th>
+						<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+						<th class="bl bb">MSC船公司航次</th>
+						<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+						<th class="bl bb">YML船公司航次ID</th>
+						<td class="bl bb"><input type="text" name="" id="" class="form_ipt form_midd_w"></td>
+					</tr>
+					<tr>
+						<td class="bb" colspan="6">
+							<div class="input_group form_button">
+								<input type="button" value="查询" class="search_button">
+								<div class="page_sel_wrap">
+									<b>每页行数</b>
+									<select name="" id="" class="form_sel form_small_w">
+										<option value="10">10</option>
+									</select>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="search_result">
+			
+				<div class="has_bor">
+					<div class="table_scroll_a">
+					<!-- 字段多的时候可以调整table的width,默认为100% -->
+						<table cellpadding="0" cellspacing="0" width="100%" class="page_table">
+							<thead class="page_table_header">
+								<tr>
+									<th class="nbl">字段1</th>
+									<th>字段2</th>
+									<th>字段3</th>
+									<th>字段4</th>
+								</tr>
+							</thead>
+							<tbody class="page_table_body">
+								<tr>
+									<td class="nbr">1</td>
+									<td class="nblr">2</td>
+									<td class="nblr">3</td>
+									<td class="nbl">4</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="pagination_container">
+						
+						<!-- pagination -->
+						<!--
+						jp-previous: 上一页
+						jp-next:     下一页
+						jp-disabled: 禁用
+						jp-hidden:   隐藏
+						jp-current:  当前页
+						-->
+						<div class="pagination">
+							<a class="jp-previous jp-disabled">〈</a>
+							<a class="jp-current">1</a>
+							<a href="#" class="">2</a>
+							<a href="#" class="">3</a>
+							<a href="#" class="">4</a>
+							<a href="#" class="">5</a>
+							<span>...</span>
+							<a>15</a>
+							<a class="jp-next">〉</a>
+						</div>
+						<!--/pagination -->
+					</div>
+				</div>
+			</div>
+			<div class="info">
+				<div id="message-warning" class="message-warning">
+			操作方法:<br/>
+			1.请必须手工输入海关航次;用于给地中海MSC公司超长航次报文发送的,请必须手工输入MSC船公司航次;用于给阳明YML公司航次ID的,请必须手工输入YML船公司航次ID。<br/>
+			2.通过下拉选择码头英文船名,UN代码会被自动选定.反之亦然.若下拉框中无所需码头英文船名或UN代码,请参考提示项。<br/>
+			3.在选定了码头英文船名和UN代码后,海关英文船名会被自动填写.若海关英文船名为黑色字体,表明已登记该船的海关英文船名,若显示为红色字体,则表明未登记该船的海关英文船名.该值均可给予修改核实。<br/>
+			4.可通过码头航次-航向-挂靠码头下拉框来选择已在码头报备的码头航次.若下拉框无所需的码头航次、航向和挂靠码头,即该航次在码头未报备,您可手动输入航次,然后进行航向和挂靠码头的选择,等码头报备航次后需对此进行核实。
+				</div>
+			</div>
+			<!--/码头-海关船期对照登记 -->
+		</div>
+	</div>
+</div>
+<!--/main -->
+
+<!-- footer -->
+<div class="footer">
+	
+	<!-- footer_top -->
+	<div class="footer_top">
+		<div class="footer_top_inner">
+			<div class="fd_link">
+				<span>友情链接：</span>
+				<div class="ui_select" 
+					data-select-header=".ui_select_text"
+					data-select-content=".ui_select_options"
+					data-select-icon=true
+				>
+					<p class="ui_select_text"><span class="ui_select_default">-友情链接-</span><i class="i10"></i></p>
+					<ul class="ui_select_options">
+						<li class="ui_select_options_item"><a href="###">1</a></li>
+						<li class="ui_select_options_item"><a href="###">2</a></li>
+						<li class="ui_select_options_item"><a href="###">3</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="qr_code"><i class="i17"></i>微信扫码关注我们
+				<div class="qr_wrap">
+					<i class="i18"></i>
+					<img src="imgs/qr.gif" alt="">
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--/footer_top -->
+	
+	<!-- footer_bottom -->
+	<div class="footer_bottom">
+		<div class="footer_bottom_inner">
+			<ul class="footer_info">
+				<li>中心提供7*24小时热诚服务</li>
+				<li><i class="i11"></i>0574-27681890</li>
+				<li><i class="i4"></i>edimaster@nbport.com.cn</li>
+				<li><i class="i5"></i>宁波市北仑区明州路301号宁波港大厦</li>
+			</ul>
+			<ul class="footer_copyright">
+				<li>版权所有©2005宁波港口EDI中心</li>
+				<li>浙ICP备06015188号<i class="i3"></i></li>
+			</ul>
+		</div>
+	</div>
+	<!--/footer_bottom -->
+</div>
+<!--/footer -->
+</body>
+</html>

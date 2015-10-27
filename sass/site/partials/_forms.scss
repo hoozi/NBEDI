@@ -1,0 +1,151 @@
+
+.ui_select {
+	//@include select;
+}
+
+.ui_input {
+
+}
+
+$baseWidth:(60px,150px,200px,300px);
+.form_group {
+	th,td {
+		padding:15px;
+	}
+	th {
+		padding-left:20px;
+		text-align:left;
+		span {
+			color:red;
+		}
+	}
+	td {
+		background-color:#f9f9f9;
+	}
+	.br{
+		@include border(right);
+	}
+	.bl{
+		@include border(left);
+	}
+	.bt{
+		@include border(top);
+	}
+	.bb{
+		@include border(bottom);
+	}
+	.input_group {
+		position:relative;
+		.page_sel_wrap {
+			position:absolute;
+			right:0;
+			top:0;
+			select {
+				padding:0;
+			}
+		}
+	}
+	.time_group {
+		@include border;
+		@extend %clearfix;
+		height:32px;
+		width:200px;
+		background-color:#fff;
+		input,.group_text {
+			@extend %fl;
+		}
+		input {
+			@include border($width:0);
+			padding-left:5px;
+			width:75px;
+			height:30px;
+			margin:1px 0;
+		}
+		.group_text {
+			margin:0 13px;
+			height:30px;
+			line-height:30px;
+		}
+	}
+	.form_button {
+		text-align:center;
+		input {
+			@include display(inline-block);
+		}
+	}
+	.form_ipt,
+	.form_sel {
+		@include border;
+		height:30px;
+		padding-left:5px;
+		line-height:30px;
+		background-color:#fff;
+	}
+	.form_small_w {
+		width:nth($baseWidth, 1)-5;
+	}
+	.form_base_w {
+		width:nth($baseWidth, 2)-5;
+	}
+	.form_midd_w {
+		width:nth($baseWidth, 3)-5;
+	}
+	.form_larger_w {
+		width:nth($baseWidth, 4)-5;
+	}
+	.input_text {
+		padding-left:10px;
+		vertical-align:middle;
+		margin:-1px 0 2px 0;
+		color:#999;
+	}
+	.form_rad {
+		vertical-align:middle;
+		margin:-1px 5px 2px 0;
+	}
+	.search_button {
+		@include button($size:larger);
+		@include border($width:0);
+		background-color:#286eb6;
+		color:#fff;
+		cursor:pointer;
+	}
+}
+
+#add_table {
+	@extend %clearfix;
+	.add_table_left,
+	.contrl_button,
+	.add_table_rigth {
+		@extend %fl;
+	}
+	.item_wrap{
+		@include border;
+		overflow-y:auto;
+		width:400px;
+		height:120px;
+		background-color:#fff;
+		li {
+			height:20px;
+			line-height:20px;
+			&.active a {
+				background-color:#ffefbe;
+			}
+			a {
+				@include display;
+				padding-left:10px;
+				color:#666;
+				&:hover {
+					background-color:#ffefbe;
+				}
+			}
+		}
+	}
+	.contrl_button  {
+		padding:0 55px;
+		button {
+			@include display;
+			margin-top:25px;
+		}
+	}
+}

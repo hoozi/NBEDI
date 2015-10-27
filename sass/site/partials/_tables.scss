@@ -1,0 +1,61 @@
+.page_table {
+	th, td {
+		@include border;
+	}
+	.nbl {
+		@include border($not:(left));
+	}
+	.nbr {
+		@include border($not:(right));
+	}
+	.nblr {
+		@include border($not:(left,right));
+	}
+	.page_table_bg {
+		background-color:#f8ffed;
+	}
+	.page_table_header th {
+		background-color:#f7f7f7;
+		padding:20px;
+	}
+	.page_table_header td {
+		background-color:#f7f7f7;
+		padding:10px;
+		font-weight:bold;
+		text-align:center;
+	}
+	.page_table_header .important {
+		color:#e54646
+	}
+	.page_table_body td {
+		padding:10px;
+		text-align:center;
+	}
+	.page_table_footer td {
+		padding:15px 0;
+	}
+	@at-root .page_table_mt {
+		margin-top:20px;
+	}
+}
+
+.table_scroll_a {
+	@extend %fwidth;
+	overflow-x:auto;
+	.page_table {
+		th, td {
+			border:0
+		}
+		th {
+			@include border($not:(top,right));
+			&.nbl {
+				border-left:0;
+			}
+		}
+		td {
+			@include border(bottom);
+		}
+
+	}
+}
+

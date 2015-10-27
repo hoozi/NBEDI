@@ -1,0 +1,10 @@
+.sub_banner {
+	@extend %fwidth;
+	@extend %overHidden;
+	position:relative;
+	height:260px;
+	.sub_banner_inner {
+		@include center($width:1920px);
+		height:260px;
+	}
+}

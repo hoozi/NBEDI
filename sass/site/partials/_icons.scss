@@ -1,0 +1,311 @@
+/*
+SCSS variables are information about icon's compiled state, stored under its original file name
+
+.icon-home {
+  width: $icon-home-width;
+}
+
+The large array-like variables contain all information about a single icon
+$icon-home: x y offset_x offset_y width height total_width total_height image_path;
+
+At the bottom of this section, we provide information about the spritesheet itself
+$spritesheet: width height image $spritesheet-sprites;
+*/
+$i1-name: 'i1';
+$i1-x: 70px;
+$i1-y: 41px;
+$i1-offset-x: -70px;
+$i1-offset-y: -41px;
+$i1-width: 6px;
+$i1-height: 8px;
+$i1-total-width: 90px;
+$i1-total-height: 71px;
+$i1-image: 'icons.png';
+$i1: (70px, 41px, -70px, -41px, 6px, 8px, 90px, 71px, 'icons.png', 'i1', );
+$i10-name: 'i10';
+$i10-x: 16px;
+$i10-y: 65px;
+$i10-offset-x: -16px;
+$i10-offset-y: -65px;
+$i10-width: 9px;
+$i10-height: 5px;
+$i10-total-width: 90px;
+$i10-total-height: 71px;
+$i10-image: 'icons.png';
+$i10: (16px, 65px, -16px, -65px, 9px, 5px, 90px, 71px, 'icons.png', 'i10', );
+$i11-name: 'i11';
+$i11-x: 0px;
+$i11-y: 25px;
+$i11-offset-x: 0px;
+$i11-offset-y: -25px;
+$i11-width: 17px;
+$i11-height: 17px;
+$i11-total-width: 90px;
+$i11-total-height: 71px;
+$i11-image: 'icons.png';
+$i11: (0px, 25px, 0px, -25px, 17px, 17px, 90px, 71px, 'icons.png', 'i11', );
+$i12-name: 'i12';
+$i12-x: 85px;
+$i12-y: 28px;
+$i12-offset-x: -85px;
+$i12-offset-y: -28px;
+$i12-width: 5px;
+$i12-height: 9px;
+$i12-total-width: 90px;
+$i12-total-height: 71px;
+$i12-image: 'icons.png';
+$i12: (85px, 28px, -85px, -28px, 5px, 9px, 90px, 71px, 'icons.png', 'i12', );
+$i13-name: 'i13';
+$i13-x: 70px;
+$i13-y: 54px;
+$i13-offset-x: -70px;
+$i13-offset-y: -54px;
+$i13-width: 9px;
+$i13-height: 5px;
+$i13-total-width: 90px;
+$i13-total-height: 71px;
+$i13-image: 'icons.png';
+$i13: (70px, 54px, -70px, -54px, 9px, 5px, 90px, 71px, 'icons.png', 'i13', );
+$i14-name: 'i14';
+$i14-x: 85px;
+$i14-y: 14px;
+$i14-offset-x: -85px;
+$i14-offset-y: -14px;
+$i14-width: 5px;
+$i14-height: 9px;
+$i14-total-width: 90px;
+$i14-total-height: 71px;
+$i14-image: 'icons.png';
+$i14: (85px, 14px, -85px, -14px, 5px, 9px, 90px, 71px, 'icons.png', 'i14', );
+$i15-name: 'i15';
+$i15-x: 85px;
+$i15-y: 42px;
+$i15-offset-x: -85px;
+$i15-offset-y: -42px;
+$i15-width: 5px;
+$i15-height: 9px;
+$i15-total-width: 90px;
+$i15-total-height: 71px;
+$i15-image: 'icons.png';
+$i15: (85px, 42px, -85px, -42px, 5px, 9px, 90px, 71px, 'icons.png', 'i15', );
+$i16-name: 'i16';
+$i16-x: 85px;
+$i16-y: 0px;
+$i16-offset-x: -85px;
+$i16-offset-y: 0px;
+$i16-width: 5px;
+$i16-height: 9px;
+$i16-total-width: 90px;
+$i16-total-height: 71px;
+$i16-image: 'icons.png';
+$i16: (85px, 0px, -85px, 0px, 5px, 9px, 90px, 71px, 'icons.png', 'i16', );
+$i17-name: 'i17';
+$i17-x: 22px;
+$i17-y: 25px;
+$i17-offset-x: -22px;
+$i17-offset-y: -25px;
+$i17-width: 15px;
+$i17-height: 15px;
+$i17-total-width: 90px;
+$i17-total-height: 71px;
+$i17-image: 'icons.png';
+$i17: (22px, 25px, -22px, -25px, 15px, 15px, 90px, 71px, 'icons.png', 'i17', );
+$i18-name: 'i18';
+$i18-x: 70px;
+$i18-y: 15px;
+$i18-offset-x: -70px;
+$i18-offset-y: -15px;
+$i18-width: 6px;
+$i18-height: 9px;
+$i18-total-width: 90px;
+$i18-total-height: 71px;
+$i18-image: 'icons.png';
+$i18: (70px, 15px, -70px, -15px, 6px, 9px, 90px, 71px, 'icons.png', 'i18', );
+$i19-name: 'i19';
+$i19-x: 21px;
+$i19-y: 47px;
+$i19-offset-x: -21px;
+$i19-offset-y: -47px;
+$i19-width: 12px;
+$i19-height: 12px;
+$i19-total-width: 90px;
+$i19-total-height: 71px;
+$i19-image: 'icons.png';
+$i19: (21px, 47px, -21px, -47px, 12px, 12px, 90px, 71px, 'icons.png', 'i19', );
+$i2-name: 'i2';
+$i2-x: 0px;
+$i2-y: 0px;
+$i2-offset-x: 0px;
+$i2-offset-y: 0px;
+$i2-width: 21px;
+$i2-height: 20px;
+$i2-total-width: 90px;
+$i2-total-height: 71px;
+$i2-image: 'icons.png';
+$i2: (0px, 0px, 0px, 0px, 21px, 20px, 90px, 71px, 'icons.png', 'i2', );
+$i20-name: 'i20';
+$i20-x: 38px;
+$i20-y: 47px;
+$i20-offset-x: -38px;
+$i20-offset-y: -47px;
+$i20-width: 12px;
+$i20-height: 12px;
+$i20-total-width: 90px;
+$i20-total-height: 71px;
+$i20-image: 'icons.png';
+$i20: (38px, 47px, -38px, -47px, 12px, 12px, 90px, 71px, 'icons.png', 'i20', );
+$i21-name: 'i21';
+$i21-x: 55px;
+$i21-y: 47px;
+$i21-offset-x: -55px;
+$i21-offset-y: -47px;
+$i21-width: 10px;
+$i21-height: 10px;
+$i21-total-width: 90px;
+$i21-total-height: 71px;
+$i21-image: 'icons.png';
+$i21: (55px, 47px, -55px, -47px, 10px, 10px, 90px, 71px, 'icons.png', 'i21', );
+$i22-name: 'i22';
+$i22-x: 70px;
+$i22-y: 0px;
+$i22-offset-x: -70px;
+$i22-offset-y: 0px;
+$i22-width: 10px;
+$i22-height: 10px;
+$i22-total-width: 90px;
+$i22-total-height: 71px;
+$i22-image: 'icons.png';
+$i22: (70px, 0px, -70px, 0px, 10px, 10px, 90px, 71px, 'icons.png', 'i22', );
+$i3-name: 'i3';
+$i3-x: 49px;
+$i3-y: 0px;
+$i3-offset-x: -49px;
+$i3-offset-y: 0px;
+$i3-width: 16px;
+$i3-height: 18px;
+$i3-total-width: 90px;
+$i3-total-height: 71px;
+$i3-image: 'icons.png';
+$i3: (49px, 0px, -49px, 0px, 16px, 18px, 90px, 71px, 'icons.png', 'i3', );
+$i4-name: 'i4';
+$i4-x: 0px;
+$i4-y: 47px;
+$i4-offset-x: 0px;
+$i4-offset-y: -47px;
+$i4-width: 16px;
+$i4-height: 13px;
+$i4-total-width: 90px;
+$i4-total-height: 71px;
+$i4-image: 'icons.png';
+$i4: (0px, 47px, 0px, -47px, 16px, 13px, 90px, 71px, 'icons.png', 'i4', );
+$i5-name: 'i5';
+$i5-x: 49px;
+$i5-y: 23px;
+$i5-offset-x: -49px;
+$i5-offset-y: -23px;
+$i5-width: 14px;
+$i5-height: 17px;
+$i5-total-width: 90px;
+$i5-total-height: 71px;
+$i5-image: 'icons.png';
+$i5: (49px, 23px, -49px, -23px, 14px, 17px, 90px, 71px, 'icons.png', 'i5', );
+$i6-name: 'i6';
+$i6-x: 30px;
+$i6-y: 65px;
+$i6-offset-x: -30px;
+$i6-offset-y: -65px;
+$i6-width: 9px;
+$i6-height: 4px;
+$i6-total-width: 90px;
+$i6-total-height: 71px;
+$i6-image: 'icons.png';
+$i6: (30px, 65px, -30px, -65px, 9px, 4px, 90px, 71px, 'icons.png', 'i6', );
+$i7-name: 'i7';
+$i7-x: 70px;
+$i7-y: 29px;
+$i7-offset-x: -70px;
+$i7-offset-y: -29px;
+$i7-width: 7px;
+$i7-height: 7px;
+$i7-total-width: 90px;
+$i7-total-height: 71px;
+$i7-image: 'icons.png';
+$i7: (70px, 29px, -70px, -29px, 7px, 7px, 90px, 71px, 'icons.png', 'i7', );
+$i8-name: 'i8';
+$i8-x: 0px;
+$i8-y: 65px;
+$i8-offset-x: 0px;
+$i8-offset-y: -65px;
+$i8-width: 11px;
+$i8-height: 6px;
+$i8-total-width: 90px;
+$i8-total-height: 71px;
+$i8-image: 'icons.png';
+$i8: (0px, 65px, 0px, -65px, 11px, 6px, 90px, 71px, 'icons.png', 'i8', );
+$i9-name: 'i9';
+$i9-x: 26px;
+$i9-y: 0px;
+$i9-offset-x: -26px;
+$i9-offset-y: 0px;
+$i9-width: 18px;
+$i9-height: 18px;
+$i9-total-width: 90px;
+$i9-total-height: 71px;
+$i9-image: 'icons.png';
+$i9: (26px, 0px, -26px, 0px, 18px, 18px, 90px, 71px, 'icons.png', 'i9', );
+$spritesheet-width: 90px;
+$spritesheet-height: 71px;
+$spritesheet-image: 'icons.png';
+$spritesheet-sprites: ($i1, $i10, $i11, $i12, $i13, $i14, $i15, $i16, $i17, $i18, $i19, $i2, $i20, $i21, $i22, $i3, $i4, $i5, $i6, $i7, $i8, $i9, );
+$spritesheet: (90px, 71px, 'icons.png', $spritesheet-sprites, );
+
+/*
+The provided mixins are intended to be used with the array-like variables
+
+.icon-home {
+  @include sprite-width($icon-home);
+}
+
+.icon-email {
+  @include sprite($icon-email);
+}
+*/
+@mixin sprite-width($sprite) {
+  width: nth($sprite, 5);
+}
+
+@mixin sprite-height($sprite) {
+  height: nth($sprite, 6);
+}
+
+@mixin sprite-position($sprite) {
+  $sprite-offset-x: nth($sprite, 3);
+  $sprite-offset-y: nth($sprite, 4);
+  background-position: $sprite-offset-x  $sprite-offset-y;
+}
+
+@mixin sprite-image{
+  @extend %icons;
+}
+
+@mixin sprite($sprite) {
+  @include sprite-image;
+  @include sprite-position($sprite);
+  @include sprite-width($sprite);
+  @include sprite-height($sprite);
+}
+
+/*
+The `sprites` mixin generates identical output to the CSS template
+  but can be overridden inside of SCSS
+
+@include sprites($spritesheet-sprites);
+*/
+@mixin sprites($sprites) {
+  @each $sprite in $sprites {
+    $sprite-name: nth($sprite, 10);
+    .#{$sprite-name} {
+      @include sprite($sprite);
+    }
+  }
+}

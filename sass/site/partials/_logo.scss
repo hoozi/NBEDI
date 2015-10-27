@@ -1,0 +1,10 @@
+.logo{
+	@include display;
+	@extend %fl;
+	width:282px;
+	height:40px;
+	padding-right:30px;
+	margin-top:20px;
+	@extend %bg;
+	background-image:url('#{$img-url}logo.gif');
+}

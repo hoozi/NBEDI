@@ -1,0 +1,96 @@
+.nav {
+	@extend %clearfix;
+	@extend %fl;
+	@include border(right);
+	height:80px;
+	> li {
+		@extend %fl;
+		&.active {
+			.drop_content {
+				@include display;
+			}
+			> a {
+				@include border(bottom,$width:5px,$color:#399c0b);
+				*border-bottom:4px solid #399c0b;
+				background-color:$baseNavBg;
+			}
+		}
+		> a {
+			@include display;
+			@include font(14px,bold);
+			padding:32px 15px 25px;
+			color:$baseLinkColor;
+			&:hover{
+				@include border(bottom,$width:5px,$color:#399c0b);
+				*border-bottom:4px solid #399c0b;
+				background-color:$baseNavBg;
+			}
+		}
+		@at-root .J_Nav {
+			position:relative;
+			&.active {
+				.drop_content {
+					@include display;
+				}
+			} 
+		}
+
+
+//----------导航下拉组件---------
+		.service_drop {
+			@extend %drop_list;
+			left:0;
+			top:80px;
+			background-color:#fff;
+			.i13 {
+				@include display;
+				@include sprite($i13);
+				position:absolute;
+				top:-5px;
+				left:40px;
+			}
+			.link_title {
+				background-color:#fff;
+				li {
+					@include border(bottom,$color:#f5f5f5);
+					a {
+						@include display;
+						padding:10px 0;
+						text-align:center;
+						color:$linkColor;
+						&:hover,
+						&.active{
+							color:$baseHoverColor
+						}
+					}
+				}
+			}
+			.link_list {
+				@extend %hidden;
+				@extend %clearfix;
+				width:300px;
+				height:100%;
+				padding-left:15px;
+				position:absolute;
+				left:100%;
+				top:0;
+				z-index:$baseZindex+10;
+				background-color:#f7f7f7;
+				li {
+					@extend %fl;
+					width:135px;
+					padding:10px 0 11px 5px;
+					a {
+						color:$linkColor;
+					}
+					a:hover {
+						color:$baseHoverColor
+					}
+				}
+			}
+		}
+//----------------------------------
+
+	}
+
+}
